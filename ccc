@@ -1,0 +1,284 @@
+I can certainly provide the Java Spring Boot code structure for the three APIs you need: **Download Template**, **Bulk Upload (and Redis Staging)**, and **Review Users (from Redis)**.
+ 
+This code assumes you have a basic Spring Boot project set up with the necessary dependencies: `spring-web`, `spring-data-redis`, and a library for Excel handling like `poi-ooxml` (Apache POI).
+ 
+## 💻 1. API Dependencies and Models
+ 
+### A. Dependency Configuration (`pom.xml` snippet)
+ 
+You'll need these in your Maven project file:
+ 
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>5.2.3</version> </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+    </dependency>
+</dependencies>
+```
+ 
+### B. User Data Model (Matching Wireframe Headers)
+ 
+This model will be used for reading data and storing it in Redis.
+ 
+```java
+// src/main/java/com/project/model/StagingUser.java
+package com.project.model;
+ 
+import java.io.Serializable;
+ 
+public class StagingUser implements Serializable {
+    // Columns matching your wireframe/template headers
+    private String firstName;
+    private String lastName;
+    private String designation;
+    private String emailAddress;
+    private String employeeId;
+    private String department;
+    private String employmentType;
+ 
+    // Constructors, Getters, and Setters (omitted for brevity)
+    // ...
+}
+```
+ 
+-----
+ 
+## 2\. Redis Utility Package
+ 
+This class handles the core Redis operations, including setting the **7-day Time-To-Live (TTL)**.
+ 
+```java
+// src/main/java/com/project/util/RedisUtility.java
+package com.project.util;
+ 
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
+ 
+import java.time.Duration;
+ 
+@Component
+public class RedisUtility {
+ 
+    private final RedisTemplate<String, Object> redisTemplate;
+ 
+    // Inject RedisTemplate via constructor
+    public RedisUtility(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+ 
+    /**
+     * Stores data in Redis with a 7-day expiration.
+     * @param tenantId Used to construct the unique key.
+     * @param value The list of StagingUser objects to store.
+     */
+    public void setStagingUsers(String tenantId, Object value) {
+        String key = buildStagingKey(tenantId);
+        // 7 days = 604800 seconds
+        redisTemplate.opsForValue().set(key, value, Duration.ofSeconds(604800)); 
+    }
+ 
+    /**
+     * Retrieves data from Redis.
+     * @param tenantId Used to construct the unique key.
+     * @return The staged list of users, or null.
+     */
+    public Object getStagingUsers(String tenantId) {
+        String key = buildStagingKey(tenantId);
+        return redisTemplate.opsForValue().get(key);
+    }
+    
+    /**
+     * Deletes the staged data for the tenant.
+     * @param tenantId Used to construct the unique key.
+     */
+    public Boolean deleteStagingUsers(String tenantId) {
+        String key = buildStagingKey(tenantId);
+        return redisTemplate.delete(key);
+    }
+    
+    // Key format: temp:users:upload:{tenantId}
+    private String buildStagingKey(String tenantId) {
+        return "temp:users:upload:" + tenantId;
+    }
+}
+```
+ 
+-----
+ 
+## 3\. Services and Controller
+ 
+### A. Download Sample Template API (GET)
+ 
+The `ExcelService` generates the file based on your wireframe headers.
+ 
+```java
+// src/main/java/com/project/service/ExcelService.java
+package com.project.service;
+ 
+import com.project.model.StagingUser;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+ 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+ 
+@Service
+public class ExcelService {
+ 
+    // Headers that match your wireframe and StagingUser model
+    private static final List<String> HEADERS = Arrays.asList(
+            "First name", "Last name", "Designation", "Email address", 
+            "Employee ID", "Department", "Employment Type");
+ 
+    /**
+     * Generates a blank Excel file with required headers.
+     */
+    public ByteArrayResource generateUserTemplate() throws IOException {
+        try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            Sheet sheet = workbook.createSheet("User Template");
+            
+            // Create the header row
+            Row headerRow = sheet.createRow(0);
+            for (int i = 0; i < HEADERS.size(); i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(HEADERS.get(i));
+            }
+ 
+            workbook.write(out);
+            return new ByteArrayResource(out.toByteArray());
+        }
+    }
+    
+    /**
+     * Reads a list of StagingUser objects from an uploaded CSV/Excel file.
+     * (Simplified implementation - full validation needed in production)
+     */
+    public List<StagingUser> readUsersFromFile(MultipartFile file) throws IOException {
+        // Implementation detail: Read file rows, map to StagingUser objects, validate data.
+        // For this example, we return a mock list:
+        return new ArrayList<>(List.of(
+            new StagingUser(/* details... */), 
+            new StagingUser(/* details... */)
+        )); 
+    }
+}
+```
+ 
+### B. Bulk Upload and Review Controller
+ 
+The controller manages the APIs, accepting the file and retrieving the data.
+ 
+```java
+// src/main/java/com/project/controller/BulkUploadController.java
+package com.project.controller;
+ 
+import com.project.model.StagingUser;
+import com.project.service.ExcelService;
+import com.project.util.RedisUtility;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+ 
+import java.io.IOException;
+import java.util.List;
+ 
+@RestController
+@RequestMapping("/api/v1/users/bulk-upload")
+public class BulkUploadController {
+ 
+    private final ExcelService excelService;
+    private final RedisUtility redisUtility;
+ 
+    public BulkUploadController(ExcelService excelService, RedisUtility redisUtility) {
+        this.excelService = excelService;
+        this.redisUtility = redisUtility;
+    }
+ 
+    // API 1: Download Sample Template (GET)
+    @GetMapping(value = "/template", produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    public ResponseEntity<Resource> downloadTemplate() throws IOException {
+        ByteArrayResource resource = excelService.generateUserTemplate();
+ 
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=user_template.xlsx");
+ 
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(resource.contentLength())
+                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                .body(resource);
+    }
+    
+    // API 2: Bulk User Upload (POST) and Redis Staging
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> uploadUsers(
+            @RequestHeader("X-Tenant-Id") String tenantId, // Tenant ID from auth/header
+            @RequestParam("file") MultipartFile file) throws IOException {
+ 
+        // 1. Basic File Validation (Max Size 50MB)
+        long MAX_SIZE = 50 * 1024 * 1024; 
+        if (file.getSize() > MAX_SIZE) {
+            return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body("File size exceeds 50MB limit.");
+        }
+        
+        // 2. Read/Parse and Validate the uploaded file
+        List<StagingUser> users = excelService.readUsersFromFile(file);
+        
+        // 3. Store the list in Redis with 7-day TTL
+        redisUtility.setStagingUsers(tenantId, users);
+ 
+        return ResponseEntity.ok("File uploaded and users staged successfully in Redis.");
+    }
+    
+    // API 3: Get Users for Review (GET)
+    @GetMapping("/review")
+    public ResponseEntity<List<StagingUser>> getStagedUsers(
+            @RequestHeader("X-Tenant-Id") String tenantId) {
+ 
+        // Retrieve the list from Redis
+        @SuppressWarnings("unchecked")
+        List<StagingUser> stagedUsers = (List<StagingUser>) redisUtility.getStagingUsers(tenantId);
+        
+        if (stagedUsers == null || stagedUsers.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        return ResponseEntity.ok(stagedUsers);
+    }
+    
+    // Optional: API to finalize and delete from Redis
+    @PostMapping("/complete")
+    public ResponseEntity<String> completeUpload(
+            @RequestHeader("X-Tenant-Id") String tenantId) {
+        
+        // --- Place logic here to save data permanently to main database ---
+ 
+        // Delete the temporary data from Redis after permanent save
+        redisUtility.deleteStagingUsers(tenantId);
+ 
+        return ResponseEntity.ok("Users successfully added and staging data cleared.");
+    }
+}
+```
+ 
