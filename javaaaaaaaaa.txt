@@ -1,0 +1,613 @@
+Perfect 👍
+Below is a **focused, interview-ready DSA plan for a 2-year Java developer**, covering **only**:
+
+✅ Arrays
+✅ Strings
+✅ Linked List
+✅ Stack & Queue
+✅ Recursion
+❌ No Trees
+❌ No DP
+
+This is exactly what most **service + product companies** expect at this level.
+
+---
+
+# 1️⃣ DSA Concepts You MUST Master (Java Focused)
+
+## 🔹 A. Arrays (HIGH PRIORITY)
+
+### Concepts
+
+* Time & space complexity
+* Prefix sum
+* Two pointers
+* Sliding window
+* Kadane’s algorithm
+* In-place modification
+* Sorting basics
+
+### MUST-SOLVE Array Questions
+
+1. Two Sum
+2. Best Time to Buy and Sell Stock
+3. Maximum Subarray (Kadane)
+4. Move Zeroes
+5. Find Missing Number
+6. Rotate Array
+7. Majority Element
+8. Subarray Sum Equals K
+9. Merge Two Sorted Arrays
+10. Product of Array Except Self
+
+---
+
+## 🔹 B. Strings (HIGH PRIORITY)
+
+### Concepts
+
+* String vs StringBuilder
+* ASCII values
+* Character frequency (HashMap / int array)
+* Two pointers
+* Sliding window
+
+### MUST-SOLVE String Questions
+
+1. Reverse a String
+2. Valid Anagram
+3. Longest Substring Without Repeating Characters
+4. Longest Common Prefix
+5. Valid Palindrome
+6. Count Vowels in a String
+7. First Unique Character
+8. Implement `strStr()` (indexOf)
+9. String Compression
+10. Remove Duplicates from String
+
+---
+
+## 🔹 C. Linked List (VERY IMPORTANT)
+
+### Concepts
+
+* Singly linked list
+* Fast & slow pointer
+* Dummy node
+* Edge case handling
+
+### MUST-SOLVE Linked List Questions
+
+1. Reverse a Linked List
+2. Detect Cycle in Linked List
+3. Find Middle of Linked List
+4. Merge Two Sorted Linked Lists
+5. Remove Nth Node from End
+6. Delete Node without Head
+7. Check if Linked List is Palindrome
+8. Intersection of Two Linked Lists
+9. Add Two Numbers (Linked List)
+10. Reverse Linked List in Pairs
+
+---
+
+## 🔹 D. Stack & Queue
+
+### Concepts
+
+* Stack using array / linked list
+* Queue using array
+* Queue using two stacks
+* Monotonic stack
+* Deque
+
+### MUST-SOLVE Stack & Queue Questions
+
+1. Valid Parentheses
+2. Implement Stack using Array
+3. Implement Queue using Array
+4. Implement Queue using Stack
+5. Min Stack
+6. Next Greater Element
+7. Stock Span Problem
+8. Reverse a Queue
+9. Sliding Window Maximum
+10. Balanced Brackets
+
+---
+
+## 🔹 E. Recursion & Backtracking (MEDIUM EXPECTATION)
+
+### Concepts
+
+* Base condition
+* Recursive tree
+* Backtracking template
+* Stack overflow awareness
+
+### MUST-SOLVE Recursion Questions
+
+1. Print Numbers 1 to N
+2. Factorial of a Number
+3. Fibonacci (recursive)
+4. Reverse an Array
+5. Check if String is Palindrome
+6. Sum of Digits
+7. Power of a Number
+8. Generate All Subsets
+9. Generate All Permutations
+10. Combination Sum (basic)
+
+---
+
+# 2️⃣ 20-Day Practice Plan (5 Questions Per Day)
+
+### 🟦 Days 1–5 → Arrays
+
+Solve 5 array problems daily from the list above.
+
+### 🟦 Days 6–10 → Strings
+
+Focus on sliding window + HashMap patterns.
+
+### 🟦 Days 11–14 → Linked List
+
+Draw diagrams before coding.
+
+### 🟦 Days 15–17 → Stack & Queue
+
+Master monotonic stack problems.
+
+### 🟦 Days 18–20 → Recursion
+
+Understand recursion flow clearly.
+
+---
+
+# 3️⃣ Java-Specific Interview Tips 🔥
+
+Interviewers WILL expect:
+
+* Clean class & method design
+* Correct use of:
+
+  ```java
+  HashMap<Character, Integer>
+  HashSet<Integer>
+  Stack<Integer>
+  Queue<Integer> q = new LinkedList<>();
+  Deque<Integer> dq = new ArrayDeque<>();
+  ```
+* Avoid unnecessary object creation
+* Handle `null` and edge cases
+
+---
+
+# 4️⃣ How to Practice Each Question (IMPORTANT)
+
+For every problem:
+
+1. Explain brute force
+2. Optimize
+3. Write Java code
+4. State time & space complexity
+
+---
+
+## 🔥 Next Step
+
+If you want, I can:
+
+* Create a **day-wise checklist**
+* Give **Java templates for each topic**
+* Take **mock interview (Array/String/LL only)**
+* Share **Top 50 LeetCode questions for your level**
+
+Just tell me 👍
+
+
+
+
+---------------------------------
+
+
+Excellent 👍
+Below is a **complete, step-by-step interview preparation kit** for a **2-year Java developer**, focused ONLY on:
+
+✅ Arrays
+✅ Strings
+✅ Linked List
+❌ No Trees
+❌ No DP
+
+I’ve broken this into **4 clear steps**, exactly as you asked.
+
+---
+
+# ✅ STEP 1: 20-DAY DAY-WISE CHECKLIST (5 QUESTIONS / DAY)
+
+## 🟦 DAYS 1–5: ARRAYS
+
+**Day 1**
+
+* Two Sum
+* Move Zeroes
+* Find Missing Number
+* Rotate Array
+* Majority Element
+
+**Day 2**
+
+* Best Time to Buy & Sell Stock
+* Maximum Subarray (Kadane)
+* Subarray Sum Equals K
+* Merge Sorted Array
+* Product of Array Except Self
+
+**Day 3**
+
+* Remove Duplicates from Sorted Array
+* Find Duplicate Number
+* Intersection of Two Arrays
+* Sort Colors
+* Plus One
+
+**Day 4**
+
+* Longest Consecutive Sequence
+* Maximum Product Subarray
+* Container With Most Water
+* Trapping Rain Water
+* Minimum Size Subarray Sum
+
+**Day 5**
+
+* Revision + re-solve weak problems
+* Explain time & space complexity verbally
+
+---
+
+## 🟦 DAYS 6–10: STRINGS
+
+**Day 6**
+
+* Reverse String
+* Valid Anagram
+* First Unique Character
+* Count Vowels
+* Remove Duplicates
+
+**Day 7**
+
+* Longest Substring Without Repeating Characters
+* Valid Palindrome
+* Implement `strStr()`
+* Longest Common Prefix
+* String Compression
+
+**Day 8**
+
+* Reverse Words in String
+* Check Rotation of String
+* Isomorphic Strings
+* Group Anagrams
+* Roman to Integer
+
+**Day 9**
+
+* Decode String
+* Palindrome Permutation
+* Repeated Substring Pattern
+* Integer to Roman
+* Compare Version Numbers
+
+**Day 10**
+
+* Revision + sliding window mastery
+
+---
+
+## 🟦 DAYS 11–15: LINKED LIST
+
+**Day 11**
+
+* Reverse Linked List
+* Find Middle
+* Detect Cycle
+* Remove Nth Node from End
+* Merge Two Sorted Lists
+
+**Day 12**
+
+* Palindrome Linked List
+* Intersection of Two Lists
+* Delete Node without Head
+* Add Two Numbers
+* Reverse in Pairs
+
+**Day 13**
+
+* Rotate List
+* Odd Even Linked List
+* Remove Duplicates
+* Partition List
+* Swap Nodes in Pairs
+
+**Day 14**
+
+* Copy List with Random Pointer
+* Flatten Multilevel List
+* Split Linked List
+* Reorder List
+* Sort Linked List
+
+**Day 15**
+
+* Full revision + dry run explanation
+
+---
+
+## 🟦 DAYS 16–20: MIXED + MOCK PRACTICE
+
+* Daily 2 Arrays
+* Daily 2 Strings
+* Daily 1 Linked List
+* Explain aloud as if interviewer is present
+
+---
+
+# ✅ STEP 2: JAVA TEMPLATES (INTERVIEW-READY)
+
+## 🔹 ARRAY TEMPLATE
+
+```java
+public class ArrayTemplate {
+
+    public static void solve(int[] arr) {
+        int n = arr.length;
+
+        for (int i = 0; i < n; i++) {
+            // logic
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4};
+        solve(arr);
+    }
+}
+```
+
+---
+
+## 🔹 STRING TEMPLATE
+
+```java
+public class StringTemplate {
+
+    public static boolean check(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        return true;
+    }
+}
+```
+
+---
+
+## 🔹 SLIDING WINDOW TEMPLATE (IMPORTANT)
+
+```java
+int left = 0;
+HashSet<Character> set = new HashSet<>();
+
+for (int right = 0; right < s.length(); right++) {
+    while (set.contains(s.charAt(right))) {
+        set.remove(s.charAt(left));
+        left++;
+    }
+    set.add(s.charAt(right));
+}
+```
+
+---
+
+## 🔹 LINKED LIST TEMPLATE
+
+```java
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+```
+
+### Reverse Linked List
+
+```java
+public ListNode reverseList(ListNode head) {
+    ListNode prev = null;
+
+    while (head != null) {
+        ListNode next = head.next;
+        head.next = prev;
+        prev = head;
+        head = next;
+    }
+    return prev;
+}
+```
+
+---
+
+## 🔹 FAST & SLOW POINTER TEMPLATE
+
+```java
+ListNode slow = head;
+ListNode fast = head;
+
+while (fast != null && fast.next != null) {
+    slow = slow.next;
+    fast = fast.next.next;
+}
+```
+
+---
+
+# ✅ STEP 3: MOCK INTERVIEW (ARRAY / STRING / LL)
+
+### 🎤 MOCK INTERVIEW ROUND
+
+**Q1 (Array – Easy)**
+
+> Given an array, find two numbers such that they add up to a target.
+
+Follow-ups:
+
+* Brute force?
+* Optimized?
+* Time & space?
+
+---
+
+**Q2 (String – Medium)**
+
+> Find the length of the longest substring without repeating characters.
+
+Expected:
+
+* Sliding window
+* HashSet / HashMap
+* O(n)
+
+---
+
+**Q3 (Linked List – Medium)**
+
+> Detect a cycle in a linked list.
+
+Follow-ups:
+
+* Why fast & slow works?
+* Space optimized approach?
+
+---
+
+**Q4 (Array – Medium)**
+
+> Maximum subarray sum.
+
+Expected:
+
+* Kadane’s Algorithm
+* Why negative sum reset?
+
+---
+
+**Q5 (Linked List – Medium)**
+
+> Check if a linked list is palindrome.
+
+Expected:
+
+* Find middle
+* Reverse second half
+* Compare
+
+👉 If you want, I can **conduct this mock live**, question by question, and evaluate your answers.
+
+---
+
+# ✅ STEP 4: TOP 50 LEETCODE QUESTIONS (YOUR LEVEL)
+
+### 🟩 ARRAYS (20)
+
+1. Two Sum
+2. Best Time to Buy and Sell Stock
+3. Maximum Subarray
+4. Move Zeroes
+5. Rotate Array
+6. Merge Sorted Array
+7. Product of Array Except Self
+8. Majority Element
+9. Subarray Sum Equals K
+10. Missing Number
+11. Find Duplicate
+12. Sort Colors
+13. Container With Most Water
+14. Trapping Rain Water
+15. Longest Consecutive Sequence
+16. Minimum Size Subarray Sum
+17. Plus One
+18. Intersection of Arrays
+19. Find Peak Element
+20. Max Product Subarray
+
+---
+
+### 🟩 STRINGS (15)
+
+21. Valid Anagram
+22. Reverse String
+23. Longest Substring Without Repeating Characters
+24. Valid Palindrome
+25. Longest Common Prefix
+26. Implement strStr
+27. String Compression
+28. First Unique Character
+29. Group Anagrams
+30. Isomorphic Strings
+31. Reverse Words
+32. Roman to Integer
+33. Integer to Roman
+34. Decode String
+35. Repeated Substring Pattern
+
+---
+
+### 🟩 LINKED LIST (15)
+
+36. Reverse Linked List
+37. Detect Cycle
+38. Find Middle
+39. Merge Two Sorted Lists
+40. Remove Nth Node
+41. Palindrome Linked List
+42. Intersection of Two Lists
+43. Add Two Numbers
+44. Delete Node
+45. Reverse in Pairs
+46. Rotate List
+47. Odd Even List
+48. Remove Duplicates
+49. Reorder List
+50. Swap Nodes in Pairs
+
+---
+
+## 🔥 FINAL ADVICE
+
+* Solve **5/day consistently**
+* Speak your solution aloud
+* Write clean Java code
+* Focus on **patterns**, not memorization
+
+---
+
+### 👉 NEXT OPTIONS
+
+I can:
+
+1. Start **live mock interview now**
+2. Give **answer explanations for each Top 50**
+3. Create a **printable checklist PDF**
+4. Help you target **specific company interviews**
+
+Just tell me what you want next 🚀
