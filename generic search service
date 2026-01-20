@@ -1,0 +1,629 @@
+package com.devfinity.project_athena.shared.search.service;
+
+import com.devfinity.project_athena.aspects.exceptions.AthenaCustomException;
+import com.devfinity.project_athena.common.enums.FilterOperatorEnum;
+import com.devfinity.project_athena.common.enums.SortOrderEnum;
+import com.devfinity.project_athena.shared.search.service.dto.*;
+import com.devfinity.project_athena.shared.search.service.predicate.CustomPredicateBuilderRegistry;
+import com.devfinity.project_athena.utilities.ValidationUtils;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.DatePath;
+import com.querydsl.core.types.dsl.DateTimePath;
+import com.querydsl.core.types.dsl.NumberPath;
+import com.querydsl.core.types.dsl.PathBuilder;
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.lang.reflect.Field;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
+/**
+ * Enhanced Generic Search Service with support for:
+ * - AND/OR logical operators
+ * - Nested filter groups
+ * - Custom predicate handlers
+ * - Backward compatibility with FilterRequestDto
+ */
+@Slf4j
+@Service
+public class GenericSearchServiceV2<T> {
+
+    private static final DateFormat DATE_FORMAT_1 = new SimpleDateFormat("yyyy-MM-dd");
+    private static final DateFormat DATE_FORMAT_2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter DATE_FORMATTER_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter DATE_FORMATTER_2 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+    @Autowired
+    private JPAQueryFactory queryFactory;
+
+    @Autowired
+    private CustomPredicateBuilderRegistry customPredicateBuilderRegistry;
+
+    /**
+     * Search method supporting both V2 (with filter groups) and V1 (backward compatible)
+     */
+    public Page<T> search(Class<T> clazz, FilterRequestDtoV2 filterRequestDto) {
+        log.info("Starting enhanced search for class {}", clazz.getSimpleName());
+        ValidationUtils.validatePageSize(filterRequestDto.getPageSize());
+        Pageable pageable = PageRequest.of(filterRequestDto.getPageNumber(), filterRequestDto.getPageSize());
+
+        PathBuilder<T> entityPath = new PathBuilder<>(clazz, clazz.getSimpleName().toLowerCase());
+
+        // Build filters - supports both filter groups and simple filters
+        BooleanBuilder builder = buildFiltersFromRequest(entityPath, filterRequestDto, clazz);
+
+        // Handle sorting
+        List<SortCriteria> sorts = Objects.isNull(filterRequestDto) || CollectionUtils.isEmpty(filterRequestDto.getSorts())
+                ? new ArrayList<>() : filterRequestDto.getSorts();
+        addOrderByCreatedDate(sorts);
+
+        JPAQuery<T> query = applySorting(queryFactory.selectFrom(entityPath).where(builder), entityPath, sorts, clazz);
+
+        long total = query.fetchCount();
+        List<T> content = query.offset(pageable.getOffset()).limit(pageable.getPageSize()).fetch();
+        log.info("Enhanced search completed: total records = {}", total);
+
+        return new PageImpl<>(content, pageable, total);
+    }
+
+    /**
+     * Backward compatible search method
+     */
+    public Page<T> search(Class<T> clazz, FilterRequestDto filterRequestDto) {
+        log.info("Starting search (backward compatible) for class {}", clazz.getSimpleName());
+        ValidationUtils.validatePageSize(filterRequestDto.getPageSize());
+        Pageable pageable = PageRequest.of(filterRequestDto.getPageNumber(), filterRequestDto.getPageSize());
+
+        List<FilterCriteria> filters = Objects.isNull(filterRequestDto) || CollectionUtils.isEmpty(filterRequestDto.getFilters())
+                ? Collections.emptyList() : filterRequestDto.getFilters();
+        List<SortCriteria> sorts = Objects.isNull(filterRequestDto) || CollectionUtils.isEmpty(filterRequestDto.getSorts())
+                ? new ArrayList<>() : filterRequestDto.getSorts();
+
+        addOrderByCreatedDate(sorts);
+        log.info("Filters: {} | Sorts: {}", filters, sorts);
+
+        PathBuilder<T> entityPath = new PathBuilder<>(clazz, clazz.getSimpleName().toLowerCase());
+        BooleanBuilder builder = buildFiltersFromList(entityPath, filters, clazz);
+        JPAQuery<T> query = applySorting(queryFactory.selectFrom(entityPath).where(builder), entityPath, sorts, clazz);
+
+        long total = query.fetchCount();
+        List<T> content = query.offset(pageable.getOffset()).limit(pageable.getPageSize()).fetch();
+        log.info("Search completed: total records = {}", total);
+
+        return new PageImpl<>(content, pageable, total);
+    }
+
+    /**
+     * Builds filters from FilterRequestDtoV2 - supports both filter groups and simple filters
+     */
+    private BooleanBuilder buildFiltersFromRequest(PathBuilder<T> path, FilterRequestDtoV2 filterRequestDto, Class<T> clazz) {
+        if (filterRequestDto.usesFilterGroups()) {
+            log.info("Building filters from filter groups");
+            return buildFiltersFromGroup(path, filterRequestDto.getFilterGroup(), clazz);
+        } else {
+            log.info("Building filters from simple filter list (backward compatible)");
+            List<FilterCriteria> filters = filterRequestDto.getFilters() != null
+                    ? filterRequestDto.getFilters()
+                    : Collections.emptyList();
+            return buildFiltersFromList(path, filters, clazz);
+        }
+    }
+
+    /**
+     * Builds filters from a filter group (supports AND/OR and nesting)
+     */
+    private BooleanBuilder buildFiltersFromGroup(PathBuilder<T> path, FilterGroupDto filterGroup, Class<T> clazz) {
+        if (filterGroup == null || !filterGroup.hasFilters()) {
+            log.warn("Empty filter group, returning empty builder");
+            return new BooleanBuilder();
+        }
+
+        BooleanBuilder groupBuilder = new BooleanBuilder();
+        FilterGroupDto.LogicalOperator operator = filterGroup.getOperator();
+
+        // Handle criteria (leaf node)
+        if (filterGroup.getCriteria() != null && !filterGroup.getCriteria().isEmpty()) {
+            log.debug("Processing {} criteria with operator {}", filterGroup.getCriteria().size(), operator);
+            for (FilterCriteria criteria : filterGroup.getCriteria()) {
+                Predicate predicate = buildSinglePredicate(path, criteria, clazz);
+                if (predicate != null) {
+                    if (operator == FilterGroupDto.LogicalOperator.AND) {
+                        groupBuilder.and(predicate);
+                    } else {
+                        groupBuilder.or(predicate);
+                    }
+                }
+            }
+        }
+
+        // Handle nested groups (branch node)
+        if (filterGroup.getGroups() != null && !filterGroup.getGroups().isEmpty()) {
+            log.debug("Processing {} nested groups with operator {}", filterGroup.getGroups().size(), operator);
+            for (FilterGroupDto nestedGroup : filterGroup.getGroups()) {
+                BooleanBuilder nestedBuilder = buildFiltersFromGroup(path, nestedGroup, clazz);
+                if (nestedBuilder.hasValue()) {
+                    if (operator == FilterGroupDto.LogicalOperator.AND) {
+                        groupBuilder.and(nestedBuilder);
+                    } else {
+                        groupBuilder.or(nestedBuilder);
+                    }
+                }
+            }
+        }
+
+        return groupBuilder;
+    }
+
+    /**
+     * Builds filters from a simple list (backward compatibility)
+     */
+    private BooleanBuilder buildFiltersFromList(PathBuilder<T> path, List<FilterCriteria> filters, Class<T> clazz) {
+        log.info("Building filters for entity {} with {} criteria", path.getType().getSimpleName(),
+                filters != null ? filters.size() : 0);
+        BooleanBuilder builder = new BooleanBuilder();
+
+        if (filters == null || filters.isEmpty()) {
+            return builder;
+        }
+
+        for (FilterCriteria criteria : filters) {
+            Predicate predicate = buildSinglePredicate(path, criteria, clazz);
+            if (predicate != null) {
+                builder.and(predicate);
+            }
+        }
+
+        return builder;
+    }
+
+    /**
+     * Builds a single predicate from filter criteria
+     */
+    private Predicate buildSinglePredicate(PathBuilder<T> path, FilterCriteria criteria, Class<T> clazz) {
+        Object originalValue = criteria.getValue();
+
+        // Auto-detect UUID values
+        if (originalValue instanceof String rawValue) {
+            try {
+                UUID uuid = UUID.fromString(rawValue.trim());
+                criteria.setValue(uuid);
+                if (criteria.getOperator() != FilterOperatorEnum.EQ) {
+                    throw new AthenaCustomException("Only EQ operator is allowed for UUID fields", HttpStatus.BAD_REQUEST);
+                }
+            } catch (IllegalArgumentException ignored) {
+                // Not a UUID, continue with original value
+            }
+        }
+
+        log.debug("Processing filter: {}", criteria);
+
+        // Check for custom predicate handlers first
+        Predicate customPredicate = buildCustomPredicate(path, criteria, clazz);
+        if (customPredicate != null) {
+            return customPredicate;
+        }
+
+        // Use standard path building
+        return buildStandardPredicate(path, criteria, clazz);
+    }
+
+    /**
+     * Custom predicate handlers - uses registry pattern for extensibility
+     * New custom predicates can be added by implementing CustomPredicateBuilder interface
+     */
+    private Predicate buildCustomPredicate(PathBuilder<T> path, FilterCriteria criteria, Class<T> clazz) {
+        return customPredicateBuilderRegistry.buildPredicate(path, criteria, clazz);
+    }
+
+    /**
+     * Standard predicate builder for regular field paths
+     */
+    private Predicate buildStandardPredicate(PathBuilder<T> path, FilterCriteria criteria, Class<T> clazz) {
+        String field = criteria.getField();
+        Expression<?> expr = getTypedPath(path, field);
+        Object value = convertValue(expr, criteria.getValue());
+        Object valueTo = convertValue(expr, criteria.getValueTo());
+        FilterOperatorEnum op = criteria.getOperator();
+
+        log.debug("Building standard predicate: field={}, operator={}, value={}", field, op, value);
+
+        switch (op) {
+            case EQ, NE, GT, GTE, LT, LTE:
+                return buildComparison(path, field, value, ComparisonType.valueOf(op.name()));
+            case LIKE:
+                return path.getString(field).likeIgnoreCase("%" + value + "%");
+            case STARTS_WITH:
+                return path.getString(field).likeIgnoreCase(value + "%");
+            case ENDS_WITH:
+                return path.getString(field).likeIgnoreCase("%" + value);
+            case BETWEEN:
+                return buildBetween(path, field, value, valueTo);
+            case IN:
+                return buildIn(path, field, convertList((List<?>) value, clazz, field), true);
+            case NOT_IN:
+                return buildIn(path, field, convertList((List<?>) value, clazz, field), false);
+            case NULL:
+                return path.get(field).isNull();
+            case NOT_NULL:
+                return path.get(field).isNotNull();
+            default:
+                log.error("Unsupported operator {} for field {}", op, field);
+                throw new AthenaCustomException("Unsupported operator: " + op, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    // ========== Helper Methods (reused from original service) ==========
+
+    public void addActiveStateFilter(FilterRequestDtoV2 filterRequestDto) {
+        FilterCriteria stateFilter = FilterCriteria.builder()
+                .field("state")
+                .value("ACTIVE")
+                .operator(FilterOperatorEnum.EQ)
+                .build();
+
+        if (filterRequestDto.usesFilterGroups()) {
+            FilterGroupDto existing = filterRequestDto.getFilterGroup();
+
+            // No existing group or filters → just create a simple AND group with state filter
+            if (existing == null || !existing.hasFilters()) {
+                FilterGroupDto root = new FilterGroupDto();
+                root.setOperator(FilterGroupDto.LogicalOperator.AND);
+                List<FilterCriteria> criteria = new ArrayList<>();
+                criteria.add(stateFilter);
+                root.setCriteria(criteria);
+                filterRequestDto.setFilterGroup(root);
+                return;
+            }
+
+            // Wrap existing group into a new root AND group: state = ACTIVE AND (existing group)
+            FilterGroupDto root = new FilterGroupDto();
+            root.setOperator(FilterGroupDto.LogicalOperator.AND);
+
+            List<FilterCriteria> rootCriteria = new ArrayList<>();
+            rootCriteria.add(stateFilter);
+            root.setCriteria(rootCriteria);
+
+            List<FilterGroupDto> nestedGroups = new ArrayList<>();
+            nestedGroups.add(existing);
+            root.setGroups(nestedGroups);
+
+            filterRequestDto.setFilterGroup(root);
+        } else {
+            // Simple filters list: builder already ANDs all predicates, so append state filter
+            List<FilterCriteria> filters = filterRequestDto.getFilters() != null
+                    ? filterRequestDto.getFilters()
+                    : new ArrayList<>();
+            filters.add(stateFilter);
+            filterRequestDto.setFilters(filters);
+        }
+    }
+
+    public void addActiveAndCompletedStateFilter(FilterRequestDtoV2 filterRequestDto) {
+        FilterCriteria stateFilter = FilterCriteria.builder()
+                .field("state")
+                .value(Arrays.asList("ACTIVE", "COMPLETED"))
+                .operator(FilterOperatorEnum.IN)
+                .build();
+
+        if (filterRequestDto.usesFilterGroups()) {
+            FilterGroupDto existing = filterRequestDto.getFilterGroup();
+
+            // No existing group or filters → just create a simple AND group with state IN (...)
+            if (existing == null || !existing.hasFilters()) {
+                FilterGroupDto root = new FilterGroupDto();
+                root.setOperator(FilterGroupDto.LogicalOperator.AND);
+                List<FilterCriteria> criteria = new ArrayList<>();
+                criteria.add(stateFilter);
+                root.setCriteria(criteria);
+                filterRequestDto.setFilterGroup(root);
+                return;
+            }
+
+            // Wrap existing group into a new root AND group: state IN (...) AND (existing group)
+            FilterGroupDto root = new FilterGroupDto();
+            root.setOperator(FilterGroupDto.LogicalOperator.AND);
+
+            List<FilterCriteria> rootCriteria = new ArrayList<>();
+            rootCriteria.add(stateFilter);
+            root.setCriteria(rootCriteria);
+
+            List<FilterGroupDto> nestedGroups = new ArrayList<>();
+            nestedGroups.add(existing);
+            root.setGroups(nestedGroups);
+
+            filterRequestDto.setFilterGroup(root);
+        } else {
+            List<FilterCriteria> filters = filterRequestDto.getFilters() != null
+                    ? filterRequestDto.getFilters()
+                    : new ArrayList<>();
+            filters.add(stateFilter);
+            filterRequestDto.setFilters(filters);
+        }
+    }
+
+    public void addOrderByCreatedDate(List<SortCriteria> sortCriteria) {
+        SortCriteria criteria = SortCriteria.builder()
+                .field("updatedAt")
+                .sortOrder(SortOrderEnum.DESC)
+                .build();
+        SortCriteria criteriaId = SortCriteria.builder()
+                .field("id")
+                .sortOrder(SortOrderEnum.DESC)
+                .build();
+        sortCriteria.add(criteria);
+        sortCriteria.add(criteriaId);
+    }
+
+    @SuppressWarnings("unchecked")
+    private JPAQuery<T> applySorting(JPAQuery<T> query, PathBuilder<T> rootPath,
+                                     List<SortCriteria> sortCriteriaList, Class<T> clazz) {
+        log.info("Applying sorting with {} criteria", sortCriteriaList.size());
+        for (SortCriteria sort : sortCriteriaList) {
+            String fieldPath = sort.getField();
+            Order order = sort.getSortOrder() == SortOrderEnum.DESC ? Order.DESC : Order.ASC;
+            log.info("Sorting by field {} in order {}", fieldPath, order);
+            Expression<?> rawExpr = getTypedPath(rootPath, fieldPath);
+            Expression<? extends Comparable<?>> cmpExpr = (Expression<? extends Comparable<?>>) rawExpr;
+            query.orderBy(new OrderSpecifier<>(order, cmpExpr));
+            log.debug("OrderSpecifier added for field {}", fieldPath);
+        }
+        return query;
+    }
+
+    private Expression<?> getTypedPath(PathBuilder<?> root, String field) {
+        log.debug("Resolving path for nested field {}", field);
+        String[] parts = field.split("\\.");
+        PathBuilder<?> current = root;
+
+        for (int i = 0; i < parts.length - 1; i++) {
+            try {
+                Field f = current.getType().getDeclaredField(parts[i]);
+                Class<?> fieldType = f.getType();
+                log.debug("Stepping into nested field '{}' of type {}", parts[i], fieldType.getSimpleName());
+                current = current.get(parts[i], fieldType);
+            } catch (NoSuchFieldException e) {
+                log.error("Invalid nested path segment: {}", parts[i]);
+                throw new AthenaCustomException("Invalid nested path: " + parts[i], HttpStatus.BAD_REQUEST);
+            }
+        }
+
+        String leaf = parts[parts.length - 1];
+        return inferType(current, leaf);
+    }
+
+    private Expression<?> inferType(PathBuilder<?> path, String field) {
+        log.debug("Inferring QueryDSL path for field {} on type {}", field, path.getType().getSimpleName());
+        try {
+            Field javaField = path.getType().getDeclaredField(field);
+            Class<?> type = javaField.getType();
+            if (type == String.class) return path.getString(field);
+            if (type == boolean.class || type == Boolean.class) return path.getBoolean(field);
+            if (type == UUID.class) return path.get(field, UUID.class);
+            if (type == Long.class || type == long.class) return path.getNumber(field, Long.class);
+            if (type == Integer.class || type == int.class) return path.getNumber(field, Integer.class);
+            if (Number.class.isAssignableFrom(type)) {
+                // Default to Long for other number types (most common for IDs)
+                return path.getNumber(field, Long.class);
+            }
+            if (Enum.class.isAssignableFrom(type)) return path.getEnum(field, (Class<Enum>) type);
+            if (Date.class.isAssignableFrom(type)) return path.getDateTime(field, (Class<Date>) type);
+            if (LocalDate.class.isAssignableFrom(type)) return path.getDate(field, LocalDate.class);
+        } catch (NoSuchFieldException e) {
+            log.error("Invalid field for inferType: {}", field);
+            throw new AthenaCustomException("Invalid field: " + field, HttpStatus.BAD_REQUEST);
+        }
+        return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Object convertValue(Expression<?> expr, Object val) {
+        log.debug("Converting value '{}' for expression {}", val, expr);
+        if (val == null) return null;
+
+        if (val instanceof String str) {
+            if (expr instanceof DateTimePath) {
+                try {
+                    return new Timestamp(DATE_FORMAT_1.parse(str).getTime());
+                } catch (ParseException e1) {
+                    try {
+                        return new Timestamp(DATE_FORMAT_2.parse(str).getTime());
+                    } catch (ParseException e2) {
+                        log.error("Failed timestamp parsing for {}", str);
+                        return str;
+                    }
+                }
+            }
+
+            if (expr instanceof DatePath && LocalDate.class.isAssignableFrom(expr.getType())) {
+                try {
+                    return LocalDate.parse(str, DATE_FORMATTER_1);
+                } catch (Exception e1) {
+                    try {
+                        return LocalDate.parse(str, DATE_FORMATTER_2);
+                    } catch (Exception e2) {
+                        log.error("Failed LocalDate parsing for {}", str);
+                        return str;
+                    }
+                }
+            }
+
+            Class<?> type = expr.getType();
+            if (Enum.class.isAssignableFrom(type)) {
+                try {
+                    Enum<?> enumVal = Enum.valueOf((Class<Enum>) type, str);
+                    log.debug("Converted '{}' to enum {}", str, enumVal);
+                    return enumVal;
+                } catch (IllegalArgumentException e) {
+                    log.error("Invalid enum value: {} for type: {}", str, type.getSimpleName());
+                    throw new AthenaCustomException("Invalid enum value: " + str, HttpStatus.BAD_REQUEST);
+                }
+            }
+
+            // Convert string to number if expression type is a number
+            if (Number.class.isAssignableFrom(type) || type == Long.class || type == long.class ||
+                    type == Integer.class || type == int.class) {
+                try {
+                    if (type == Long.class || type == long.class) {
+                        Long longVal = Long.parseLong(str);
+                        log.debug("Converted '{}' to Long {}", str, longVal);
+                        return longVal;
+                    } else if (type == Integer.class || type == int.class) {
+                        Integer intVal = Integer.parseInt(str);
+                        log.debug("Converted '{}' to Integer {}", str, intVal);
+                        return intVal;
+                    } else if (Number.class.isAssignableFrom(type)) {
+                        // Try Long first (most common for IDs), then Integer
+                        try {
+                            return Long.parseLong(str);
+                        } catch (NumberFormatException e) {
+                            return Integer.parseInt(str);
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    log.error("Invalid number value: {} for type: {}", str, type.getSimpleName());
+                    throw new AthenaCustomException("Invalid number value: " + str, HttpStatus.BAD_REQUEST);
+                }
+            }
+        }
+
+        return val;
+    }
+
+    private Timestamp parseTimestamp(String date) {
+        try {
+            return new Timestamp(DATE_FORMAT_1.parse(date).getTime());
+        } catch (ParseException e1) {
+            try {
+                return new Timestamp(DATE_FORMAT_2.parse(date).getTime());
+            } catch (ParseException e2) {
+                log.error("Error converting date: {}", date);
+                throw new AthenaCustomException("Error converting field", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<?> convertList(List<?> list, Class<?> clazz, String field) {
+        log.debug("Converting list for field {}", field);
+        if (list == null || list.isEmpty()) return list;
+
+        try {
+            Class<?> fieldType = clazz.getDeclaredField(field).getType();
+            if (fieldType == Timestamp.class) {
+                return list.stream().map(val -> parseTimestamp((String) val)).collect(java.util.stream.Collectors.toList());
+            }
+            if (fieldType.isEnum()) {
+                return list.stream()
+                        .map(val -> Enum.valueOf((Class<Enum>) fieldType, val.toString()))
+                        .collect(java.util.stream.Collectors.toList());
+            }
+        } catch (NoSuchFieldException e) {
+            log.error("Field not found during list conversion: {}", field, e);
+            throw new AthenaCustomException("Field not found", HttpStatus.BAD_REQUEST);
+        }
+        return list;
+    }
+
+    private Predicate buildComparison(PathBuilder<?> path, String field, Object value, ComparisonType type) {
+        log.debug("buildComparison: field={}, type={}, value={}", field, type, value);
+        if (value instanceof String v)
+            return type == ComparisonType.EQ ? path.getString(field).equalsIgnoreCase(v) : path.getString(field).notEqualsIgnoreCase(v);
+        if (value instanceof Integer v) return buildNumberComparison(path, field, v, type);
+        if (value instanceof Long v) return buildLongComparison(path, field, v, type);
+        if (value instanceof UUID v) {
+            return type == ComparisonType.EQ ? path.get(field, UUID.class).eq(v) : path.get(field, UUID.class).ne(v);
+        }
+        if (value instanceof Boolean v)
+            return type == ComparisonType.EQ ? path.getBoolean(field).eq(v) : path.getBoolean(field).ne(v);
+        if (value instanceof Enum<?> v)
+            return type == ComparisonType.EQ ? path.getEnum(field, (Class<Enum>) v.getClass()).eq(v) : path.getEnum(field, (Class<Enum>) v.getClass()).ne(v);
+        if (value instanceof Date v) return buildDateComparison(path, field, v, type);
+        return null;
+    }
+
+    private Predicate buildNumberComparison(PathBuilder<?> path, String field, Integer value, ComparisonType type) {
+        log.debug("buildNumberComparison: field={}, type={}, value={}", field, type, value);
+        NumberPath<Integer> pathNum = path.getNumber(field, Integer.class);
+        return switch (type) {
+            case EQ -> pathNum.eq(value);
+            case NE -> pathNum.ne(value);
+            case GT -> pathNum.gt(value);
+            case GTE -> pathNum.goe(value);
+            case LT -> pathNum.lt(value);
+            case LTE -> pathNum.loe(value);
+        };
+    }
+
+    private Predicate buildLongComparison(PathBuilder<?> path, String field, Long value, ComparisonType type) {
+        log.debug("buildLongComparison: field={}, type={}, value={}", field, type, value);
+        NumberPath<Long> pathNum = path.getNumber(field, Long.class);
+        return switch (type) {
+            case EQ -> pathNum.eq(value);
+            case NE -> pathNum.ne(value);
+            case GT -> pathNum.gt(value);
+            case GTE -> pathNum.goe(value);
+            case LT -> pathNum.lt(value);
+            case LTE -> pathNum.loe(value);
+        };
+    }
+
+    private Predicate buildDateComparison(PathBuilder<?> path, String field, Date value, ComparisonType type) {
+        log.debug("buildDateComparison: field={}, type={}, value={}", field, type, value);
+        DatePath<Date> pathDate = path.getDate(field, Date.class);
+        return switch (type) {
+            case EQ -> pathDate.eq(value);
+            case NE -> pathDate.ne(value);
+            case GT -> pathDate.after(value);
+            case GTE -> pathDate.goe(value);
+            case LT -> pathDate.before(value);
+            case LTE -> pathDate.loe(value);
+        };
+    }
+
+    private Predicate buildBetween(PathBuilder<?> path, String field, Object from, Object to) {
+        log.debug("buildBetween: field={}, from={}, to={}", field, from, to);
+        if (from instanceof Integer f && to instanceof Integer t)
+            return path.getNumber(field, Integer.class).between(f, t);
+        if (from instanceof Date f && to instanceof Date t)
+            return path.getDate(field, Date.class).between(f, t);
+        return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Predicate buildIn(PathBuilder<?> path, String field, List<?> values, boolean isIn) {
+        log.debug("buildIn: field={}, values={}, isIn={}", field, values, isIn);
+        if (values == null || values.isEmpty()) return null;
+
+        Object first = values.get(0);
+        if (first instanceof String)
+            return isIn ? path.getString(field).in((List<String>) values) : path.getString(field).notIn((List<String>) values);
+        if (first instanceof Integer)
+            return isIn ? path.getNumber(field, Integer.class).in((List<Integer>) values) : path.getNumber(field, Integer.class).notIn((List<Integer>) values);
+        if (first instanceof Enum<?>)
+            return isIn ? path.getEnum(field, (Class<Enum>) first.getClass()).in((List<Enum>) values) :
+                    path.getEnum(field, (Class<Enum>) first.getClass()).notIn((List<Enum>) values);
+        return null;
+    }
+
+    private enum ComparisonType {EQ, NE, GT, GTE, LT, LTE}
+}
