@@ -1,0 +1,50 @@
+package com.aws_lambda_second_lambda.second_lambda.service;
+
+import com.aws_lambda_second_lambda.second_lambda.model.AuditLog;
+import com.aws_lambda_second_lambda.second_lambda.model.TenantUser;
+import com.aws_lambda_second_lambda.second_lambda.repository.AuditLogRepository;
+import com.aws_lambda_second_lambda.second_lambda.utility.CommonUtility;
+import com.aws_lambda_second_lambda.second_lambda.utility.Enumeration;
+import java.util.Date;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class AuditLogService {
+
+  private final AuditLogRepository auditLogRepository;
+
+  public void auditLog(
+      Long id,
+      Enumeration.IntegrationCodeName social_type,
+      TenantUser user,
+      String notes,
+      Date postCreatedDate,
+      Enumeration.ReviewAction action,
+      String title) {
+    log.info(
+        "Audit log: action={}, userId={}, postId={}, socialType={}",
+        action,
+        user.getId(),
+        id,
+        social_type);
+    AuditLog auditLog = new AuditLog();
+    auditLog.setAction(action);
+    auditLog.setUserId(user.getId());
+    if (!CommonUtility.isNullOrEmpty(notes)) {
+      auditLog.setNotes(notes);
+    }
+    auditLog.setPostId(id);
+    auditLog.setPostCreatedDatetime(postCreatedDate);
+    auditLog.setSocialType(social_type);
+    auditLog.setActivityDatetime(new Date());
+    if (!CommonUtility.isNullOrEmpty(title)) {
+      auditLog.setTitle(title);
+    }
+    auditLog.setUserName(user.getFirstName() + " " + user.getLastName());
+    auditLogRepository.save(auditLog);
+  }
+}
