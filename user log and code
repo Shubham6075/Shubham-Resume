@@ -1,0 +1,399 @@
+Perfect 👍
+Below is a **complete, end-to-end, copy-paste–ready solution** that matches **exactly** what you asked:
+
+* ✅ Session created at **login**
+* ✅ Session closed at **logout**
+* ✅ Session ID reused for **all API audit logs**
+* ✅ **NO changes** to existing APIs (except login/logout)
+* ✅ **API-wise events logged automatically**
+* ✅ Works in **same application module**
+* ✅ Uses **AOP**, **Spring Security**, **JPA**
+
+---
+
+# 🔷 OVERALL FLOW (IMPORTANT)
+
+```
+LOGIN API
+ └─ Create USER_SESSION (DB)
+ └─ Store sessionId in HttpSession
+
+ANY API CALL
+ └─ AOP intercepts controller
+ └─ Reads sessionId from HttpSession
+ └─ Writes AUDIT_LOG row
+
+LOGOUT API
+ └─ Update USER_SESSION (logout_time, status)
+```
+
+---
+
+# 1️⃣ DATABASE TABLES
+
+## 1.1 User Session Table
+
+```sql
+CREATE TABLE user_session (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL,
+    login_time TIMESTAMP NOT NULL,
+    logout_time TIMESTAMP,
+    ip_address VARCHAR(50),
+    user_agent TEXT,
+    status VARCHAR(20)
+);
+```
+
+---
+
+## 1.2 Audit Log Table
+
+```sql
+CREATE TABLE audit_log (
+    id UUID PRIMARY KEY,
+    session_id UUID,
+    actor_id UUID,
+    actor_name VARCHAR(255),
+    product VARCHAR(100),
+    event VARCHAR(100),
+    type VARCHAR(50),
+    source VARCHAR(50),
+    description TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT now()
+);
+```
+
+---
+
+# 2️⃣ ENTITIES
+
+## 2.1 UserSession Entity
+
+```java
+@Entity
+@Table(name = "user_session")
+public class UserSession {
+
+    @Id
+    private UUID id;
+
+    private UUID userId;
+
+    private Instant loginTime;
+    private Instant logoutTime;
+
+    private String ipAddress;
+    private String userAgent;
+
+    private String status;
+}
+```
+
+---
+
+## 2.2 AuditLog Entity
+
+```java
+@Entity
+@Table(name = "audit_log")
+public class AuditLog {
+
+    @Id
+    @GeneratedValue
+    private UUID id;
+
+    private UUID sessionId;
+
+    private UUID actorId;
+    private String actorName;
+
+    private String product;
+    private String event;
+
+    private String type;
+    private String source;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    private Instant createdAt = Instant.now();
+}
+```
+
+---
+
+# 3️⃣ REPOSITORIES
+
+```java
+@Repository
+public interface UserSessionRepository
+        extends JpaRepository<UserSession, UUID> {
+}
+```
+
+```java
+@Repository
+public interface AuditLogRepository
+        extends JpaRepository<AuditLog, UUID> {
+}
+```
+
+---
+
+# 4️⃣ LOGIN API (ONLY PLACE YOU CHANGE)
+
+### On Successful Login
+
+```java
+@PostMapping("/auth/login")
+public ResponseEntity<?> login(
+        @RequestBody LoginRequest request,
+        HttpServletRequest httpRequest) {
+
+    User user = authenticate(request);
+
+    UUID sessionId = UUID.randomUUID();
+
+    UserSession session = new UserSession();
+    session.setId(sessionId);
+    session.setUserId(user.getId());
+    session.setLoginTime(Instant.now());
+    session.setIpAddress(httpRequest.getRemoteAddr());
+    session.setUserAgent(httpRequest.getHeader("User-Agent"));
+    session.setStatus("ACTIVE");
+
+    userSessionRepository.save(session);
+
+    // Store sessionId for future APIs
+    httpRequest.getSession().setAttribute("SESSION_ID", sessionId.toString());
+
+    return ResponseEntity.ok(tokenOrResponse);
+}
+```
+
+---
+
+# 5️⃣ LOGOUT API (ONLY PLACE YOU CHANGE)
+
+```java
+@PostMapping("/auth/logout")
+public ResponseEntity<?> logout(HttpServletRequest request) {
+
+    Object val = request.getSession().getAttribute("SESSION_ID");
+
+    if (val != null) {
+        UUID sessionId = UUID.fromString(val.toString());
+
+        userSessionRepository.findById(sessionId)
+            .ifPresent(session -> {
+                session.setLogoutTime(Instant.now());
+                session.setStatus("LOGGED_OUT");
+                userSessionRepository.save(session);
+            });
+    }
+
+    request.getSession().invalidate();
+
+    return ResponseEntity.ok().build();
+}
+```
+
+---
+
+# 6️⃣ SECURITY + SESSION UTIL (NEW)
+
+```java
+public final class AuditContextUtil {
+
+    private AuditContextUtil() {}
+
+    public static UUID getSessionId() {
+        ServletRequestAttributes attr =
+            (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+
+        if (attr == null) return null;
+
+        Object val = attr.getRequest()
+                .getSession()
+                .getAttribute("SESSION_ID");
+
+        return val != null ? UUID.fromString(val.toString()) : null;
+    }
+
+    public static UserPrincipal getCurrentUser() {
+        Authentication auth =
+            SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null && auth.getPrincipal() instanceof UserPrincipal) {
+            return (UserPrincipal) auth.getPrincipal();
+        }
+        return null;
+    }
+
+    public static HttpServletRequest getRequest() {
+        return ((ServletRequestAttributes)
+                RequestContextHolder.getRequestAttributes())
+                .getRequest();
+    }
+}
+```
+
+---
+
+# 7️⃣ AUDIT LOG SERVICE (CORE LOGIC)
+
+```java
+@Service
+public class AuditLogService {
+
+    private final AuditLogRepository repository;
+
+    public AuditLogService(AuditLogRepository repository) {
+        this.repository = repository;
+    }
+
+    @Async
+    public void logApiEvent(JoinPoint joinPoint, Exception ex) {
+
+        HttpServletRequest req = AuditContextUtil.getRequest();
+        UserPrincipal user = AuditContextUtil.getCurrentUser();
+
+        // Ignore auth & health APIs
+        if (req.getRequestURI().startsWith("/auth")
+            || req.getRequestURI().startsWith("/actuator")) {
+            return;
+        }
+
+        AuditLog log = new AuditLog();
+        log.setSessionId(AuditContextUtil.getSessionId());
+        log.setActorId(user != null ? user.getId() : null);
+        log.setActorName(user != null ? user.getUsername() : "SYSTEM");
+
+        log.setProduct(resolveProduct(req.getRequestURI()));
+        log.setEvent(resolveEvent(req.getMethod()));
+        log.setType("BACKEND_SERVICE");
+        log.setSource(user != null ? "USER" : "SYSTEM");
+
+        log.setDescription(
+            req.getMethod() + " " + req.getRequestURI() + " invoked"
+        );
+
+        repository.save(log);
+    }
+
+    private String resolveProduct(String uri) {
+        if (uri.startsWith("/org")) return "ORG";
+        if (uri.startsWith("/product")) return "PRODUCT";
+        if (uri.startsWith("/user")) return "USER";
+        return "UNKNOWN";
+    }
+
+    private String resolveEvent(String method) {
+        return switch (method) {
+            case "POST" -> "CREATED";
+            case "PUT" -> "UPDATED";
+            case "DELETE" -> "DELETED";
+            default -> "FETCHED";
+        };
+    }
+}
+```
+
+---
+
+# 8️⃣ AOP ASPECT (ZERO API CHANGES)
+
+```java
+@Aspect
+@Component
+public class ApiAuditAspect {
+
+    private final AuditLogService auditLogService;
+
+    public ApiAuditAspect(AuditLogService auditLogService) {
+        this.auditLogService = auditLogService;
+    }
+
+    @AfterReturning(
+        pointcut = "within(@org.springframework.web.bind.annotation.RestController *)"
+    )
+    public void afterSuccess(JoinPoint joinPoint) {
+        auditLogService.logApiEvent(joinPoint, null);
+    }
+
+    @AfterThrowing(
+        pointcut = "within(@org.springframework.web.bind.annotation.RestController *)",
+        throwing = "ex"
+    )
+    public void afterFailure(JoinPoint joinPoint, Exception ex) {
+        auditLogService.logApiEvent(joinPoint, ex);
+    }
+}
+```
+
+---
+
+# 9️⃣ ENABLE ASYNC (ONCE)
+
+```java
+@EnableAsync
+@SpringBootApplication
+public class Application {
+}
+```
+
+---
+
+# 🔄 END-TO-END EXAMPLE
+
+### User logs in
+
+```
+SESSION_ID = S1
+```
+
+### Calls APIs
+
+```
+POST /product
+PUT /org/12
+DELETE /user/5
+```
+
+### audit_log rows
+
+| session_id | product | event   | actor |
+| ---------- | ------- | ------- | ----- |
+| S1         | PRODUCT | CREATED | vijay |
+| S1         | ORG     | UPDATED | vijay |
+| S1         | USER    | DELETED | vijay |
+
+### Logs out
+
+```
+user_session.status = LOGGED_OUT
+```
+
+---
+
+# ✅ WHAT YOU ACHIEVED
+
+✔ Session-level audit trail
+✔ API-wise event logging
+✔ Zero changes to existing APIs
+✔ Clean separation
+✔ Production-grade
+✔ Ready for compliance & reports
+
+---
+
+## Want next?
+
+* Request/response payload diff
+* Kafka audit stream
+* QueryDSL audit search
+* Tenant-aware audit
+* Block API if session invalid
+
+Tell me and I’ll extend this cleanly 🚀
