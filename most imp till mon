@@ -1,0 +1,195 @@
+Perfect! I can make a **single-page, printable “one-shot” PDF-style cheat sheet** for all the concepts we discussed **with code snippets, edge cases, complexities, and short explanations**, so you can **just take a photo and revise anywhere**. Then we’ll do **HR + Tech final mock**.
+
+Here’s how I’ll structure it:
+
+---
+
+# **📌 DSA & Sorting + Arrays Cheat Sheet (1 Page)**
+
+**Note:** All code in Java, concise and ready to write.
+
+---
+
+## 1️⃣ **Linear Search**
+
+```java
+int linearSearch(int[] arr, int target){
+    for(int i=0;i<arr.length;i++)
+        if(arr[i]==target) return i;
+    return -1;
+}
+```
+
+* **Concept:** Check elements one by one
+* **Time:** O(n), **Space:** O(1)
+* **Edge:** empty array, single element, not found
+
+---
+
+## 2️⃣ **Binary Search (Iterative)**
+
+```java
+int binarySearch(int[] arr,int target){
+    int low=0,high=arr.length-1;
+    while(low<=high){
+        int mid=low+(high-low)/2;
+        if(arr[mid]==target) return mid;
+        else if(target<arr[mid]) high=mid-1;
+        else low=mid+1;
+    }
+    return -1;
+}
+```
+
+* **Concept:** Divide & conquer, sorted array
+* **Time:** O(log n), **Space:** O(1)
+* **Edge:** empty array, duplicates
+
+---
+
+## 3️⃣ **Bubble Sort**
+
+```java
+void bubbleSort(int[] arr){
+    int n=arr.length; boolean swapped;
+    for(int i=0;i<n-1;i++){
+        swapped=false;
+        for(int j=0;j<n-i-1;j++)
+            if(arr[j]>arr[j+1]){
+                int t=arr[j]; arr[j]=arr[j+1]; arr[j+1]=t; swapped=true;
+            }
+        if(!swapped) break;
+    }
+}
+```
+
+* **Best:** O(n), Worst: O(n²), Stable ✅
+* **Edge:** empty/single/ already sorted
+
+---
+
+## 4️⃣ **Selection Sort**
+
+```java
+void selectionSort(int[] arr){
+    int n=arr.length;
+    for(int i=0;i<n-1;i++){
+        int min=i;
+        for(int j=i+1;j<n;j++) if(arr[j]<arr[min]) min=j;
+        int t=arr[min]; arr[min]=arr[i]; arr[i]=t;
+    }
+}
+```
+
+* Always O(n²), not stable ❌
+* **Edge:** duplicates, sorted
+
+---
+
+## 5️⃣ **Insertion Sort**
+
+```java
+void insertionSort(int[] arr){
+    for(int i=1;i<arr.length;i++){
+        int key=arr[i],j=i-1;
+        while(j>=0 && arr[j]>key){ arr[j+1]=arr[j]; j--; }
+        arr[j+1]=key;
+    }
+}
+```
+
+* **Best:** O(n) nearly sorted
+* **Worst:** O(n²) reverse sorted
+* **Edge:** empty, single element
+
+---
+
+## 6️⃣ **Array Utilities**
+
+**Reverse**
+
+```java
+void reverse(int[] arr){ int l=0,r=arr.length-1; while(l<r){int t=arr[l];arr[l]=arr[r];arr[r]=t;l++;r--;}}
+```
+
+**Max**
+
+```java
+int max(int[] arr){int m=arr[0]; for(int i=1;i<arr.length;i++) if(arr[i]>m) m=arr[i]; return m;}
+```
+
+**Second Largest**
+
+```java
+int secondLargest(int[] arr){
+    int first=Integer.MIN_VALUE,second=Integer.MIN_VALUE;
+    for(int num:arr){
+        if(num>first){second=first;first=num;}
+        else if(num>second && num!=first) second=num;
+    }
+    return second;
+}
+```
+
+**Is Sorted**
+
+```java
+boolean isSorted(int[] arr){for(int i=1;i<arr.length;i++) if(arr[i]<arr[i-1]) return false; return true;}
+```
+
+**Remove Duplicates (Sorted Array)**
+
+```java
+int removeDup(int[] arr){
+    if(arr.length==0) return 0;
+    int j=0;
+    for(int i=1;i<arr.length;i++) if(arr[i]!=arr[j]) arr[++j]=arr[i];
+    return j+1;
+}
+```
+
+---
+
+## 7️⃣ **Important Edge Cases**
+
+* Empty array / single element
+* Already sorted / reverse sorted
+* Duplicates / all same elements
+* Negative numbers
+* Index out of bounds
+
+---
+
+## 8️⃣ **Complexity Quick Reference**
+
+| Algo          | Best  | Worst    | Stable |
+| ------------- | ----- | -------- | ------ |
+| Linear Search | O(1)  | O(n)     | ✅      |
+| Binary Search | O(1)  | O(log n) | ✅      |
+| Bubble        | O(n)  | O(n²)    | ✅      |
+| Selection     | O(n²) | O(n²)    | ❌      |
+| Insertion     | O(n)  | O(n²)    | ✅      |
+
+---
+
+### ✅ Tips:
+
+1. Always check **edge cases first**
+2. Start with **looping solution**, then optimize
+3. Explain logic **non-IT + IT** style
+4. Mention complexity for each solution
+
+---
+
+This sheet is **small enough to fit in one photo**.
+
+---
+
+Next, I can run **final HR + Tech mock interview** using this sheet as reference.
+We’ll do:
+
+* HR behavioral + attitude
+* Tech questions on arrays, search, sorting, edge cases
+* Real-time feedback + model answers
+
+Say **“final mock”**, and we’ll start 👊
