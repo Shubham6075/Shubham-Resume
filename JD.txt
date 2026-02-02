@@ -1,0 +1,2033 @@
+Good question 👍
+For a **2-year Java developer**, you don’t need *hundreds* of DSA problems.
+If you solve the **right 60**, you’re interview-ready for **service / product companies (including Adobe-style rounds)**.
+
+Below is a **curated, realistic 60-question list** — focused on what actually gets asked.
+
+---
+
+# ✅ The 60 Questions a 2-Year Java Dev MUST Solve
+
+## 🔹 1. Strings (15 questions)
+
+These are **non-negotiable**.
+
+1. Max occurring character in a string
+2. First non-repeating character
+3. Reverse a string (with / without extra space)
+4. Check palindrome
+5. Count vowels & consonants
+6. Anagram check
+7. Remove duplicate characters
+8. Longest substring without repeating characters
+9. String rotation check
+10. Count words in a string
+11. Replace spaces with `%20`
+12. Reverse words in a sentence
+13. Check if string contains only digits
+14. Find all duplicate characters
+15. Compare two strings without using `equals()`
+
+👉 If you master these, **string rounds won’t scare you again**.
+
+---
+
+## 🔹 2. Arrays (15 questions)
+
+16. Find max & min in array
+17. Second largest element
+18. Remove duplicates from array
+19. Rotate array (left/right)
+20. Find missing number (1–n)
+21. Move zeros to end
+22. Find duplicate number
+23. Sort array without using sort
+24. Two sum problem
+25. Merge two sorted arrays
+26. Intersection of two arrays
+27. Find frequency of elements
+28. Subarray with given sum
+29. Kadane’s algorithm (basic understanding)
+30. Check if array is sorted
+
+---
+
+## 🔹 3. HashMap / Hashing (10 questions)
+
+**Very important for Java devs.**
+
+31. Character frequency in string
+32. Word frequency in sentence
+33. Find first non-repeating character using HashMap
+34. Find duplicate elements using HashMap
+35. Two sum using HashMap
+36. Group anagrams
+37. Count pairs with given sum
+38. Find majority element
+39. Check if two arrays are equal
+40. Find longest substring with K distinct characters
+
+---
+
+## 🔹 4. LinkedList (5 questions)
+
+Don’t overdo — basics are enough.
+
+41. Reverse a linked list
+42. Detect loop (Floyd’s algorithm – concept)
+43. Find middle of linked list
+44. Remove Nth node from end
+45. Merge two sorted linked lists
+
+---
+
+## 🔹 5. Stack & Queue (5 questions)
+
+46. Reverse string using stack
+47. Valid parentheses
+48. Implement stack using array
+49. Implement queue using array
+50. Next greater element (basic)
+
+---
+
+## 🔹 6. Basic Algorithms & Logic (10 questions)
+
+51. Binary search
+52. Linear search
+53. Factorial (iterative & recursive)
+54. Fibonacci series
+55. Prime number check
+56. Count digits in number
+57. Reverse a number
+58. Armstrong number
+59. GCD / LCM
+60. Swap two numbers without temp variable
+
+---
+
+# ⏱️ How long this should take
+
+* **2–3 questions/day**
+* **30–35 days total**
+* Write code **by hand at least once per topic**
+
+---
+
+## 🔑 Interview Rule (IMPORTANT)
+
+For each question, always know:
+
+1. **Brute force**
+2. **Optimized version**
+3. **Time & Space complexity**
+
+Even if code slips, **this saves you**.
+
+---
+
+## 🎯 If you solve these 60
+
+You will:
+
+* Clear **80% of Java DSA rounds**
+* Never blank out like last time
+* Sound confident even under pressure
+
+If you want, I can:
+
+* give you a **30-day daily plan**
+* or **Java code templates** for these patterns
+* or run **mock interviews** (like elder-bro style 😄)
+
+Just tell me what you want next 👊
+
+
+
+------------------------------
+
+
+
+
+Perfect — that’s a **realistic goal** for a **2-year Java dev** if you prepare *smart*, not endlessly.
+Let’s lock in a **30-day plan aimed at 8+ LPA** 💪
+
+I’ll be **practical + strict**, like an elder bro who wants you to win.
+
+---
+
+# 🎯 Target Profile (8+ LPA, 2 YOE)
+
+Companies expect:
+
+* Solid **Java + OOP**
+* **Collections & HashMap confidence**
+* Clean **DSA basics** (strings/arrays)
+* Decent **REST API + Spring Boot discussion**
+* Clear explanation under pressure
+
+This plan covers **all of that**.
+
+---
+
+# 🗓️ 30-Day Interview-Ready Plan
+
+## 🔹 WEEK 1 (Days 1–7): STRING + CONFIDENCE FOUNDATION
+
+### Day 1
+
+* Reverse string (2 ways)
+* Palindrome check
+* Count vowels & consonants
+  👉 Focus: loops + indexing
+
+### Day 2
+
+* Max occurring character
+* First non-repeating character
+* Remove duplicate characters
+
+### Day 3
+
+* Anagram check
+* String rotation
+* Replace space with `%20`
+
+### Day 4
+
+* Reverse words in sentence
+* Count words
+* Compare strings without `equals`
+
+### Day 5
+
+* Longest substring without repeating characters
+* Longest substring with K distinct characters
+
+### Day 6
+
+* **Revise all string questions**
+* Write code **without IDE**
+
+### Day 7
+
+* Mock interview (self)
+
+  * Explain logic aloud
+  * Time + space complexity
+
+---
+
+## 🔹 WEEK 2 (Days 8–14): ARRAYS + HASHMAP (CORE MONEY MAKERS)
+
+### Day 8
+
+* Max & min in array
+* Second largest
+* Check if array is sorted
+
+### Day 9
+
+* Remove duplicates from array
+* Rotate array
+* Move zeros to end
+
+### Day 10
+
+* Missing number
+* Find duplicate number
+* Two Sum (brute + HashMap)
+
+### Day 11
+
+* Subarray with given sum
+* Kadane’s algorithm (concept + code)
+
+### Day 12
+
+* Merge two sorted arrays
+* Intersection of arrays
+
+### Day 13
+
+* Character frequency using HashMap
+* Word frequency
+* Majority element
+
+### Day 14
+
+* **Full revision + mock interview**
+
+---
+
+## 🔹 WEEK 3 (Days 15–21): LINKED LIST + STACK + ALGO BASICS
+
+### Day 15
+
+* Reverse linked list
+* Find middle node
+
+### Day 16
+
+* Detect loop (Floyd’s)
+* Remove Nth node from end
+
+### Day 17
+
+* Valid parentheses
+* Reverse string using stack
+
+### Day 18
+
+* Implement stack using array
+* Implement queue using array
+
+### Day 19
+
+* Binary search
+* Linear search
+
+### Day 20
+
+* Factorial (iter + recur)
+* Fibonacci series
+
+### Day 21
+
+* Prime number
+* GCD / LCM
+* Number reverse
+
+---
+
+## 🔹 WEEK 4 (Days 22–30): 8+ LPA DIFFERENTIATORS
+
+### Day 22 – Java Core (VERY IMPORTANT)
+
+* `equals()` vs `hashCode()`
+* `HashMap` internal working
+* `final` vs `finally` vs `finalize`
+
+### Day 23
+
+* `List` vs `Set` vs `Map`
+* ArrayList vs LinkedList
+* ConcurrentHashMap vs HashMap
+
+### Day 24 – OOP
+
+* SOLID principles
+* Inheritance vs composition
+* Abstract class vs interface
+
+### Day 25 – Multithreading (Basics)
+
+* Thread vs Runnable
+* Synchronization
+* `volatile`, `wait/notify`
+
+### Day 26 – Spring Boot / REST
+
+* Controller → Service → Repository flow
+* Exception handling (`@ControllerAdvice`)
+* REST status codes
+
+### Day 27 – System Thinking
+
+* How to design a simple CRUD API
+* Pagination
+* Validation
+
+### Day 28 – Mock Interview Day
+
+* 1 DSA
+* 1 Java core
+* 1 REST scenario
+
+### Day 29 – Weak Area Fix
+
+* Revise where you struggle most
+
+### Day 30 – Final Polish
+
+* Resume review
+* STAR answers
+* Confidence prep
+
+---
+
+## ⏰ Daily Time Needed
+
+* **Weekdays:** 1.5–2 hrs
+* **Weekends:** 3 hrs
+
+Consistency > intensity.
+
+---
+
+## 💰 8+ LPA Reality Check (Important)
+
+With this prep, you can target:
+
+* Product companies
+* Good service companies
+* Funded startups
+
+You must:
+
+* **Explain clearly**
+* **Admit small mistakes**
+* **Never go blank**
+
+---
+
+## 🔥 One Golden Interview Rule
+
+If code fails, say:
+
+> “The approach is correct, let me fix the syntax.”
+
+That alone saves rounds.
+
+---
+
+If you want next, I can:
+
+* Create a **daily checklist PDF**
+* Give **Java code templates** for all patterns
+* Do **mock interviews like real rounds**
+* Help **resume tuning for 8+ LPA**
+
+Tell me what you want first 👊
+
+
+
+
+---------------------------------------------------
+
+
+Love this approach 👌
+**Templates first → practice later** is exactly how you avoid blanking out in interviews.
+
+Below is a **Java template cheat-sheet** covering **all major patterns**, with:
+
+* ✅ **Code template**
+* ✅ **Which Data Structure to use**
+* ✅ **When to use this pattern**
+
+Save this. Revise daily.
+
+---
+
+# 🧠 JAVA DSA TEMPLATES (2 YOE – 8+ LPA READY)
+
+---
+
+## 🔹 1. STRING TEMPLATES
+
+### 1️⃣ Character Frequency (Max / Duplicate / Non-Repeating)
+
+**DS Used:** `HashMap<Character, Integer>`
+
+```java
+Map<Character, Integer> map = new HashMap<>();
+
+for (char c : s.toCharArray()) {
+    map.put(c, map.getOrDefault(c, 0) + 1);
+}
+```
+
+👉 Used for:
+
+* Max occurring char
+* First non-repeating char
+* Duplicate characters
+
+---
+
+### 2️⃣ Max Occurring Character
+
+**DS Used:** HashMap
+
+```java
+char ans = 0;
+int max = 0;
+
+for (Map.Entry<Character, Integer> e : map.entrySet()) {
+    if (e.getValue() > max) {
+        max = e.getValue();
+        ans = e.getKey();
+    }
+}
+```
+
+---
+
+### 3️⃣ First Non-Repeating Character
+
+**DS Used:** HashMap
+
+```java
+for (char c : s.toCharArray()) {
+    if (map.get(c) == 1) {
+        System.out.println(c);
+        break;
+    }
+}
+```
+
+---
+
+### 4️⃣ Reverse String
+
+**DS Used:** StringBuilder / char[]
+
+```java
+String rev = new StringBuilder(s).reverse().toString();
+```
+
+OR
+
+```java
+char[] arr = s.toCharArray();
+int l = 0, r = arr.length - 1;
+
+while (l < r) {
+    char temp = arr[l];
+    arr[l] = arr[r];
+    arr[r] = temp;
+    l++;
+    r--;
+}
+```
+
+---
+
+### 5️⃣ Palindrome Check
+
+**DS Used:** Two pointers
+
+```java
+int l = 0, r = s.length() - 1;
+
+while (l < r) {
+    if (s.charAt(l) != s.charAt(r)) {
+        return false;
+    }
+    l++;
+    r--;
+}
+return true;
+```
+
+---
+
+### 6️⃣ Anagram Check
+
+**DS Used:** HashMap or int[26]
+
+```java
+int[] freq = new int[26];
+
+for (char c : s1.toCharArray()) freq[c - 'a']++;
+for (char c : s2.toCharArray()) freq[c - 'a']--;
+
+for (int i : freq)
+    if (i != 0) return false;
+```
+
+---
+
+### 7️⃣ Longest Substring Without Repeating Characters
+
+**DS Used:** HashSet (Sliding Window)
+
+```java
+Set<Character> set = new HashSet<>();
+int l = 0, max = 0;
+
+for (int r = 0; r < s.length(); r++) {
+    while (set.contains(s.charAt(r))) {
+        set.remove(s.charAt(l++));
+    }
+    set.add(s.charAt(r));
+    max = Math.max(max, r - l + 1);
+}
+```
+
+---
+
+## 🔹 2. ARRAY TEMPLATES
+
+### 8️⃣ Max & Min
+
+**DS Used:** None
+
+```java
+int max = arr[0], min = arr[0];
+
+for (int n : arr) {
+    max = Math.max(max, n);
+    min = Math.min(min, n);
+}
+```
+
+---
+
+### 9️⃣ Second Largest Element
+
+**DS Used:** None
+
+```java
+int first = Integer.MIN_VALUE;
+int second = Integer.MIN_VALUE;
+
+for (int n : arr) {
+    if (n > first) {
+        second = first;
+        first = n;
+    } else if (n > second && n != first) {
+        second = n;
+    }
+}
+```
+
+---
+
+### 🔟 Two Sum
+
+**DS Used:** HashMap
+
+```java
+Map<Integer, Integer> map = new HashMap<>();
+
+for (int i = 0; i < arr.length; i++) {
+    int diff = target - arr[i];
+    if (map.containsKey(diff)) {
+        return new int[]{map.get(diff), i};
+    }
+    map.put(arr[i], i);
+}
+```
+
+---
+
+### 1️⃣1️⃣ Move Zeros to End
+
+**DS Used:** Two pointers
+
+```java
+int idx = 0;
+
+for (int n : arr)
+    if (n != 0) arr[idx++] = n;
+
+while (idx < arr.length)
+    arr[idx++] = 0;
+```
+
+---
+
+## 🔹 3. LINKED LIST TEMPLATES
+
+### 1️⃣2️⃣ Reverse Linked List
+
+**DS Used:** Pointers
+
+```java
+Node prev = null, curr = head;
+
+while (curr != null) {
+    Node next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+}
+head = prev;
+```
+
+---
+
+### 1️⃣3️⃣ Detect Loop (Floyd)
+
+**DS Used:** Two pointers
+
+```java
+Node slow = head, fast = head;
+
+while (fast != null && fast.next != null) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow == fast) return true;
+}
+return false;
+```
+
+---
+
+## 🔹 4. STACK & QUEUE TEMPLATES
+
+### 1️⃣4️⃣ Valid Parentheses
+
+**DS Used:** Stack
+
+```java
+Stack<Character> st = new Stack<>();
+
+for (char c : s.toCharArray()) {
+    if (c == '(') st.push(')');
+    else if (st.isEmpty() || st.pop() != c) return false;
+}
+return st.isEmpty();
+```
+
+---
+
+### 1️⃣5️⃣ Reverse String Using Stack
+
+**DS Used:** Stack
+
+```java
+Stack<Character> st = new Stack<>();
+
+for (char c : s.toCharArray()) st.push(c);
+
+StringBuilder sb = new StringBuilder();
+while (!st.isEmpty()) sb.append(st.pop());
+```
+
+---
+
+## 🔹 5. BASIC ALGORITHM TEMPLATES
+
+### 1️⃣6️⃣ Binary Search
+
+**DS Used:** None
+
+```java
+int l = 0, r = arr.length - 1;
+
+while (l <= r) {
+    int mid = l + (r - l) / 2;
+    if (arr[mid] == key) return mid;
+    else if (arr[mid] < key) l = mid + 1;
+    else r = mid - 1;
+}
+```
+
+---
+
+### 1️⃣7️⃣ Fibonacci
+
+**DS Used:** None
+
+```java
+int a = 0, b = 1;
+
+for (int i = 2; i <= n; i++) {
+    int c = a + b;
+    a = b;
+    b = c;
+}
+```
+
+---
+
+### 1️⃣8️⃣ Prime Check
+
+**DS Used:** None
+
+```java
+if (n <= 1) return false;
+
+for (int i = 2; i * i <= n; i++)
+    if (n % i == 0) return false;
+
+return true;
+```
+
+---
+
+## 🔑 HOW TO USE THIS
+
+1. **Revise templates daily (15–20 mins)**
+2. Then start solving questions using these
+3. Never memorize blindly — understand *when* to use which DS
+
+---
+
+## 🚀 You’re on the right track
+
+This prep level is **enough for 8+ LPA** if paired with:
+
+* calm explanation
+* clean basics
+* confidence
+
+If you want next:
+
+* PDF version
+* Full **question → template mapping**
+* Mock interview using only these templates
+
+Just tell me 👊
+
+
+
+-------------------------------------
+
+
+
+
+Excellent ask 👍
+This is **exactly** what interviewers expect when they say
+
+> “First do brute force, then optimize.”
+
+Below are **O(n²) SIMPLE LOOP TEMPLATES** — no HashMap, no fancy DS.
+Just **loops + counters**.
+If you know these, you’ll **never freeze again**.
+
+---
+
+# 🧠 O(n²) BRUTE-FORCE JAVA TEMPLATES
+
+*(Loops only – interview lifesavers)*
+
+---
+
+## 🔹 1. Character Frequency (Brute Force)
+
+**DS Used:** None (just loops)
+
+```java
+int n = s.length();
+
+for (int i = 0; i < n; i++) {
+    int count = 1;
+    char c = s.charAt(i);
+
+    for (int j = i + 1; j < n; j++) {
+        if (c == s.charAt(j)) {
+            count++;
+        }
+    }
+
+    System.out.println(c + " -> " + count);
+}
+```
+
+👉 Base template for **all string frequency problems**
+
+---
+
+## 🔹 2. Max Occurring Character (Your Adobe Question)
+
+**DS Used:** None
+
+```java
+int maxCount = 0;
+char ans = 0;
+
+for (int i = 0; i < s.length(); i++) {
+    int count = 1;
+    char c = s.charAt(i);
+
+    for (int j = i + 1; j < s.length(); j++) {
+        if (c == s.charAt(j)) {
+            count++;
+        }
+    }
+
+    if (count > maxCount) {
+        maxCount = count;
+        ans = c;
+    }
+}
+```
+
+📌 **Memorize this pattern** — this is where you got stuck.
+
+---
+
+## 🔹 3. First Non-Repeating Character (O n²)
+
+**DS Used:** None
+
+```java
+for (int i = 0; i < s.length(); i++) {
+    int count = 0;
+
+    for (int j = 0; j < s.length(); j++) {
+        if (s.charAt(i) == s.charAt(j)) {
+            count++;
+        }
+    }
+
+    if (count == 1) {
+        System.out.println(s.charAt(i));
+        break;
+    }
+}
+```
+
+---
+
+## 🔹 4. Check Palindrome (Nested Loop Way)
+
+**DS Used:** None
+
+```java
+boolean isPalindrome = true;
+
+for (int i = 0; i < s.length() / 2; i++) {
+    if (s.charAt(i) != s.charAt(s.length() - i - 1)) {
+        isPalindrome = false;
+        break;
+    }
+}
+```
+
+---
+
+## 🔹 5. Remove Duplicate Characters (Brute Force)
+
+**DS Used:** None
+
+```java
+String result = "";
+
+for (int i = 0; i < s.length(); i++) {
+    boolean duplicate = false;
+
+    for (int j = 0; j < i; j++) {
+        if (s.charAt(i) == s.charAt(j)) {
+            duplicate = true;
+            break;
+        }
+    }
+
+    if (!duplicate) {
+        result += s.charAt(i);
+    }
+}
+```
+
+---
+
+## 🔹 6. Anagram Check (O n²)
+
+**DS Used:** None
+
+```java
+boolean isAnagram = true;
+
+for (int i = 0; i < s1.length(); i++) {
+    int count1 = 0, count2 = 0;
+
+    for (int j = 0; j < s1.length(); j++)
+        if (s1.charAt(i) == s1.charAt(j)) count1++;
+
+    for (int j = 0; j < s2.length(); j++)
+        if (s1.charAt(i) == s2.charAt(j)) count2++;
+
+    if (count1 != count2) {
+        isAnagram = false;
+        break;
+    }
+}
+```
+
+---
+
+## 🔹 7. Duplicate Elements in Array
+
+**DS Used:** None
+
+```java
+for (int i = 0; i < arr.length; i++) {
+    for (int j = i + 1; j < arr.length; j++) {
+        if (arr[i] == arr[j]) {
+            System.out.println(arr[i]);
+            break;
+        }
+    }
+}
+```
+
+---
+
+## 🔹 8. Second Largest Element (O n²)
+
+**DS Used:** None
+
+```java
+int largest = Integer.MIN_VALUE;
+int second = Integer.MIN_VALUE;
+
+for (int i = 0; i < arr.length; i++) {
+    boolean isLargest = true;
+
+    for (int j = 0; j < arr.length; j++) {
+        if (arr[j] > arr[i]) {
+            isLargest = false;
+            break;
+        }
+    }
+
+    if (isLargest) largest = arr[i];
+}
+
+for (int i = 0; i < arr.length; i++) {
+    if (arr[i] != largest && arr[i] > second) {
+        second = arr[i];
+    }
+}
+```
+
+---
+
+## 🔹 9. Two Sum (Brute Force)
+
+**DS Used:** None
+
+```java
+for (int i = 0; i < arr.length; i++) {
+    for (int j = i + 1; j < arr.length; j++) {
+        if (arr[i] + arr[j] == target) {
+            System.out.println(i + ", " + j);
+        }
+    }
+}
+```
+
+---
+
+## 🔹 10. Longest Substring Without Repeating (Brute Force)
+
+**DS Used:** None
+
+```java
+int max = 0;
+
+for (int i = 0; i < s.length(); i++) {
+    boolean[] visited = new boolean[256];
+    int count = 0;
+
+    for (int j = i; j < s.length(); j++) {
+        if (visited[s.charAt(j)]) break;
+
+        visited[s.charAt(j)] = true;
+        count++;
+    }
+
+    max = Math.max(max, count);
+}
+```
+
+---
+
+## 🔑 INTERVIEW GOLDEN RULE (REMEMBER THIS)
+
+Always say:
+
+> “First I’ll explain brute force O(n²), then optimize to O(n).”
+
+Even if you code only brute force correctly — **you still pass**.
+
+---
+
+## 📌 How to revise this
+
+* Day 1–3: **Strings brute force**
+* Day 4–5: **Arrays brute force**
+* Write these **without IDE**
+
+---
+
+### Final truth (elder-bro mode):
+
+If you had known **Template #2**, you would **not have failed that Adobe question**.
+
+You’re very close.
+Next step if you want:
+
+* combine **brute → optimized side-by-side**
+* or mock interview where I interrupt like a real interviewer 😄
+
+
+
+
+------------------------------------------------
+
+
+
+
+
+
+
+Perfect, this is the **right clarification** 👍
+You’re asking:
+
+> **Which exact 2 loop (O n²) templates + which HashMap templates I must remember, and which questions map to each template**
+
+I’ll give you **ONLY the ESSENTIAL ones** — no overload.
+
+---
+
+# ✅ THE 2 MOST IMPORTANT O(n²) LOOP TEMPLATES
+
+*(80% string/array questions come from these)*
+
+---
+
+## 🔹 TEMPLATE 1: **Frequency Count (Nested Loop)**
+
+📌 **MOST IMPORTANT TEMPLATE**
+
+### 🔁 Template
+
+```java
+for (int i = 0; i < n; i++) {
+    int count = 1;
+    char c = s.charAt(i);
+
+    for (int j = i + 1; j < n; j++) {
+        if (c == s.charAt(j)) {
+            count++;
+        }
+    }
+
+    // use count here
+}
+```
+
+### ❓ Questions using this template
+
+* Max occurring character ⭐
+* Count frequency of each character
+* Find duplicate characters
+* Most frequent element in array
+* Count occurrences of an element
+* Majority element (brute force)
+
+👉 **Your Adobe question used THIS template**
+
+---
+
+## 🔹 TEMPLATE 2: **Compare Current With All (Full Scan)**
+
+📌 Used when **order matters**
+
+### 🔁 Template
+
+```java
+for (int i = 0; i < n; i++) {
+    int count = 0;
+
+    for (int j = 0; j < n; j++) {
+        if (s.charAt(i) == s.charAt(j)) {
+            count++;
+        }
+    }
+
+    if (count == 1) {
+        // first non-repeating
+        break;
+    }
+}
+```
+
+### ❓ Questions using this template
+
+* First non-repeating character ⭐
+* Check unique characters
+* Check anagram (brute force)
+* Count frequency with order preserved
+
+---
+
+# ✅ THE 2 MOST IMPORTANT HASHMAP TEMPLATES
+
+*(Optimized O(n) versions)*
+
+---
+
+## 🔹 MAP TEMPLATE 1: **Build Frequency Map**
+
+📌 **Base for almost everything**
+
+### 🔁 Template
+
+```java
+Map<Character, Integer> map = new HashMap<>();
+
+for (char c : s.toCharArray()) {
+    map.put(c, map.getOrDefault(c, 0) + 1);
+}
+```
+
+### ❓ Questions using this template
+
+* Character frequency
+* Max occurring character
+* Duplicate characters
+* First non-repeating character
+* Word frequency
+* Majority element
+
+---
+
+## 🔹 MAP TEMPLATE 2: **Extract Answer From Map**
+
+📌 Used after building map
+
+### 🔁 Template
+
+```java
+char ans = 0;
+int max = 0;
+
+for (Map.Entry<Character, Integer> e : map.entrySet()) {
+    if (e.getValue() > max) {
+        max = e.getValue();
+        ans = e.getKey();
+    }
+}
+```
+
+### ❓ Questions using this template
+
+* Max occurring character
+* Most frequent word
+* Majority element
+* Max frequency number in array
+
+---
+
+# 🔗 BRUTE FORCE → HASHMAP MAPPING (IMPORTANT)
+
+| Question             | O(n²) Template | HashMap Template    |
+| -------------------- | -------------- | ------------------- |
+| Max occurring char   | Template 1     | Map 1 + Map 2       |
+| First non-repeating  | Template 2     | Map 1 + scan string |
+| Duplicate characters | Template 1     | Map 1               |
+| Majority element     | Template 1     | Map 1 + Map 2       |
+| Word frequency       | Template 1     | Map 1               |
+| Two Sum              | Pair loop      | HashMap diff lookup |
+
+---
+
+# 🧠 INTERVIEW MEMORY TRICK
+
+If the problem has **word “count / frequency / most”**
+👉 **Template 1 → then HashMap**
+
+If the problem has **word “first” / “order”**
+👉 **Template 2 → then HashMap + string scan**
+
+---
+
+## 🎯 What you MUST memorize (minimum)
+
+* ✅ Loop Template 1
+* ✅ Loop Template 2
+* ✅ HashMap Template 1
+* ✅ HashMap Template 2
+
+That’s it.
+These **4 templates alone** cover **most 2-YOE interview questions**.
+
+---
+
+If you want next:
+
+* One-page **cheat sheet**
+* Interview **spoken explanation script**
+* Mock interview using only these templates
+
+Just say 👍
+
+
+
+---------------------------------------------------
+
+
+Perfect! Let’s make a **universal O(n²) template for “remove duplicates”** that works for **both arrays and strings**.
+This is **interview gold** because it saves you from “array size confusion” and works without fancy data structures.
+
+---
+
+# **🔹 Universal Brute-Force Template – O(n²)**
+
+```java
+// Input: can be int array or string
+// Example for int array:
+int[] arr = {1, 2, 3, 2, 1, 4};
+int n = arr.length;
+
+// Step 1: create temporary array / string to hold unique elements
+int[] temp = new int[n]; // for string, use char[]
+int k = 0; // keeps track of unique count
+
+for (int i = 0; i < n; i++) {
+    boolean isDuplicate = false;
+    
+    // Step 2: check if current element already exists in temp
+    for (int j = 0; j < k; j++) {
+        if (arr[i] == temp[j]) { // for string use: s.charAt(i) == temp[j]
+            isDuplicate = true;
+            break;
+        }
+    }
+
+    // Step 3: if not duplicate, add to temp
+    if (!isDuplicate) {
+        temp[k] = arr[i]; // for string: temp[k] = s.charAt(i)
+        k++;
+    }
+}
+
+// Step 4: copy unique elements to final array / string
+int[] unique = new int[k];
+for (int i = 0; i < k; i++) {
+    unique[i] = temp[i];
+}
+
+// Step 5: print result
+System.out.println(Arrays.toString(unique));
+```
+
+---
+
+## **✅ Line-by-line Explanation**
+
+1. `temp` → temporary array holding **only unique elements**
+2. `k` → keeps count of how many unique elements we have
+3. Outer loop → picks every element of the original array
+4. Inner loop → checks if the element is already in `temp[0..k-1]`
+5. `if (!isDuplicate)` → only then add to `temp`
+6. After all iterations → copy first `k` elements into `unique` array
+7. Result → contains **all unique elements, same order as original**
+
+---
+
+## **🌟 Why it’s universal**
+
+* Works for **arrays** and **strings**
+* Works for **numbers**, **characters**, even small objects if you override equality
+* Simple **nested loop logic** → no extra DS required
+* Interviewer sees **you understand duplicates and array manipulation**
+
+---
+
+## **💡 Key Interview Notes**
+
+1. Maximum possible size = original array → explains `temp[n]`
+2. Track `k` → dynamic size of unique elements
+3. Always explain → can optimize using `Set` → O(n)
+
+---
+
+### **Example Input / Output**
+
+```java
+int[] arr = {1,2,3,2,1,4};
+Output: [1,2,3,4]
+
+String s = "aabbcde";
+Output: ['a','b','c','d','e']
+```
+
+---
+
+If you want, I can **also make the exact same template using Strings**, with `char[]` instead of `int[]`, so you can **write it verbatim in interviews** without hesitation.
+
+Do you want me to do that next?
+
+
+----------------------------
+
+
+Perfect! Let’s make the **exact same universal template for Strings** using **O(n²)** loops. This is **interview-ready** and avoids `Set` or other fancy DS, so you can code it immediately under pressure.
+
+---
+
+# **🔹 Remove Duplicates from String – O(n²) Template**
+
+```java
+String s = "aabbcde";
+int n = s.length();
+
+// Step 1: create temporary array to hold unique chars
+char[] temp = new char[n];
+int k = 0; // keeps track of unique count
+
+// Step 2: check each character
+for (int i = 0; i < n; i++) {
+    boolean isDuplicate = false;
+    
+    // Step 3: check if s.charAt(i) already exists in temp[0..k-1]
+    for (int j = 0; j < k; j++) {
+        if (s.charAt(i) == temp[j]) {
+            isDuplicate = true;
+            break;
+        }
+    }
+
+    // Step 4: if not duplicate, add to temp
+    if (!isDuplicate) {
+        temp[k] = s.charAt(i);
+        k++;
+    }
+}
+
+// Step 5: build final string from temp
+StringBuilder unique = new StringBuilder();
+for (int i = 0; i < k; i++) {
+    unique.append(temp[i]);
+}
+
+// Step 6: print result
+System.out.println(unique.toString());
+```
+
+---
+
+## **✅ Line-by-Line Explanation**
+
+1. `char[] temp = new char[n];` → temporary array to store **unique characters**
+2. `k = 0;` → keeps count of unique elements added so far
+3. Outer loop → picks each character from the string
+4. Inner loop → checks if the character already exists in `temp`
+5. `if (!isDuplicate)` → only then append it to `temp`
+6. Build final string using `StringBuilder` → `temp[0..k-1]`
+7. Output → string with **unique characters in original order**
+
+---
+
+### **🌟 Example**
+
+```java
+Input: "aabbcde"
+Output: "abcde"
+```
+
+---
+
+### **💡 Key Points for Interview**
+
+1. Explain **why temp array is length n** → max unique = original length
+2. Track `k` → dynamic size of unique array
+3. Emphasize **order is preserved**
+4. Can optimize using `LinkedHashSet` → O(n)
+
+---
+
+If you memorize this **two templates** (array & string), you can instantly solve **any “remove duplicates” question** in interviews — without freezing or worrying about array size.
+
+---
+
+If you want, I can now make a **full cheat sheet**:
+
+* **All your main 2-YOE interview questions**
+* **O(n²) template → O(n) optimized template**
+* **Time & space complexity**
+* **Quick verbal explanation cues**
+
+So you can revise in **10–15 minutes per day**.
+
+Do you want me to make that next?
+
+
+
+---------------------------------------------------
+
+
+Perfect! Let’s make a **compact, interview-ready cheat sheet** for all your **main 2-YOE Java / DSA questions**.
+I’ll structure it as:
+
+**Question → O(n²) template → O(n) optimized template → Time/Space → Key verbal cues**
+
+---
+
+# **📝 2-YOE Java / DSA Cheat Sheet**
+
+---
+
+## **1️⃣ Max Occurring Character / Frequency**
+
+| Aspect   | O(n²)                                         | O(n) HashMap                           | Time / Space                                         | Verbal Cue                                        |
+| -------- | --------------------------------------------- | -------------------------------------- | ---------------------------------------------------- | ------------------------------------------------- |
+| Template | Nested loops to count occurrences             | `HashMap<char, count>` → find max      | Brute: O(n²)/O(1), Optimized: O(n)/O(n)              | “First count all frequencies, then pick max”      |
+| Key      | Outer loop picks each char, inner loop counts | Map stores frequency, scan map for max | Mention `LinkedHashMap` to preserve first occurrence | “Can also optimize with HashMap instead of loops” |
+
+---
+
+## **2️⃣ First Non-Repeating Character**
+
+| Aspect   | O(n²)                                                 | O(n) HashMap                                           | Time / Space                            | Verbal Cue                                    |
+| -------- | ----------------------------------------------------- | ------------------------------------------------------ | --------------------------------------- | --------------------------------------------- |
+| Template | Nested loop: count each char, pick first with count=1 | `LinkedHashMap<char, count>` → pick first with count=1 | Brute: O(n²)/O(1), Optimized: O(n)/O(n) | “Count frequency, preserve order, pick first” |
+
+---
+
+## **3️⃣ Remove Duplicates – Array**
+
+| Aspect   | O(n²)                                                          | O(n) HashSet                       | Time / Space                            | Verbal Cue                                              |
+| -------- | -------------------------------------------------------------- | ---------------------------------- | --------------------------------------- | ------------------------------------------------------- |
+| Template | Nested loop: check if element exists in temp array, add if not | `LinkedHashSet` → convert to array | Brute: O(n²)/O(n), Optimized: O(n)/O(n) | “Loop + temp array OR HashSet to track unique elements” |
+
+---
+
+## **4️⃣ Remove Duplicates – String**
+
+| Aspect   | O(n²)                                                            | O(n) HashSet                                   | Time / Space                            | Verbal Cue                                                |
+| -------- | ---------------------------------------------------------------- | ---------------------------------------------- | --------------------------------------- | --------------------------------------------------------- |
+| Template | Nested loop: check if char exists in temp char array, add if not | `LinkedHashSet<Character>` → convert to String | Brute: O(n²)/O(n), Optimized: O(n)/O(n) | “Same as array, preserve order, use StringBuilder at end” |
+
+---
+
+## **5️⃣ Linear Search**
+
+| Aspect   | O(n²)                    | O(n)                       | Time / Space | Verbal Cue                                |
+| -------- | ------------------------ | -------------------------- | ------------ | ----------------------------------------- |
+| Template | N/A – simple single loop | Single loop to find target | O(n)/O(1)    | “Scan array from start, break when found” |
+
+---
+
+## **6️⃣ Binary Search**
+
+| Aspect   | O(n²)                                   | O(log n)                          | Time / Space       | Verbal Cue                                 |
+| -------- | --------------------------------------- | --------------------------------- | ------------------ | ------------------------------------------ |
+| Template | N/A                                     | Loop or recursion on sorted array | O(log n)/O(1)      | “Divide array, check mid, move left/right” |
+| Key      | Must **sort array first** if not sorted | Explain time complexity O(log n)  | Mention edge cases |                                            |
+
+---
+
+## **7️⃣ Bubble Sort**
+
+| Aspect   | O(n²)                                       | O(n) Optimization                 | Time / Space | Verbal Cue                                           |
+| -------- | ------------------------------------------- | --------------------------------- | ------------ | ---------------------------------------------------- |
+| Template | Nested loops, swap adjacent if out of order | Use `swapped` flag to break early | O(n²)/O(1)   | “Compare each adjacent pair, largest bubbles to end” |
+
+---
+
+## **8️⃣ Selection Sort**
+
+| Aspect   | O(n²)                               | O(n²)                   | Time / Space | Verbal Cue                                                            |
+| -------- | ----------------------------------- | ----------------------- | ------------ | --------------------------------------------------------------------- |
+| Template | Nested loops, find min, swap with i | Cannot optimize further | O(n²)/O(1)   | “Select minimum element in each pass, swap with first unsorted index” |
+
+---
+
+## **9️⃣ Duplicate Elements – Array / String**
+
+| Aspect   | O(n²)                                             | O(n) HashSet                | Time / Space                            | Verbal Cue                                                  |
+| -------- | ------------------------------------------------- | --------------------------- | --------------------------------------- | ----------------------------------------------------------- |
+| Template | Nested loops → compare with previous / temp array | HashSet to track duplicates | Brute: O(n²)/O(n), Optimized: O(n)/O(n) | “Loop & temp array for brute, or Set for fast unique check” |
+
+---
+
+## **10️⃣ Two Pointers Technique (Optional / Bonus)**
+
+| Aspect   | O(n²)                              | O(n)                        | Time / Space                            | Verbal Cue                                                       |
+| -------- | ---------------------------------- | --------------------------- | --------------------------------------- | ---------------------------------------------------------------- |
+| Template | Nested loop (i,j) to compare pairs | Single pass if array sorted | Brute: O(n²)/O(1), Optimized: O(n)/O(1) | “Two pointers moving from start/end to find target / sum / pair” |
+
+---
+
+# **💡 General Interview Tips / Power Points**
+
+1. **Brute force first → verbalize → optimize**
+2. **Always mention time & space complexity**
+3. **Edge cases**: empty array/string, all duplicates, single element
+4. **Dry-run small examples** aloud
+5. **Explain your data structures**: HashMap, LinkedHashMap, HashSet
+6. **Templates memorization**: 4–5 universal templates cover most 2-YOE questions
+7. **Speak confidently**: even if code is not perfect, logic + verbal explanation counts
+
+---
+
+If you **practice all of these 10 question types** using:
+
+* **O(n²) loops** first
+* Then **O(n) optimized**
+
+You will be **fully ready for 2-YOE Java interviews targeting 8–10 LPA**.
+
+---
+
+If you want, I can make a **one-page “visual template map”** showing:
+
+* Which template → which question
+* Brute → optimized flow
+* Code snippet hints
+
+So you can **memorize and revise in 10 minutes**.
+
+Do you want me to make that visual map next?
+
+
+---------------------------------------
+
+
+Perfect! Let’s create a **compact visual template map** for all your 2-YOE interview questions.
+Think of it as a **one-page cheat sheet** you can **memorize and revise in 10 minutes**. I’ll structure it as **Question → Brute (O(n²)) → Optimized (O(n)) → Key Tip / Verbal Cue**.
+
+---
+
+# **💡 2-YOE Java / DSA Visual Template Map**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                2-YOE Interview Template Map             │
+├───────────────┬───────────────┬─────────────┬──────────┤
+│ Question      │ Brute O(n²)   │ Optimized O(n) │ Tip/Verbal Cue │
+├───────────────┼───────────────┼─────────────┼──────────┤
+│ Max Occurring │ Nested loops   │ HashMap<char, freq> │ "Count all → pick max" │
+│ Character     │ count each char│ scan map for max │ LinkedHashMap preserves first occurrence │
+├───────────────┼───────────────┼─────────────┼──────────┤
+│ First Non-   │ Nested loops   │ LinkedHashMap<char,freq> │ "Count frequency, pick first non-repeating" │
+│ Repeating     │ count each char│ scan map for first=1 │ Brute shows understanding, optimized O(n) │
+├───────────────┼───────────────┼─────────────┼──────────┤
+│ Remove       │ Nested loops + │ LinkedHashSet → convert │ "Track unique elements, preserve order" │
+│ Duplicates   │ temp array     │ to array/string │ temp array tracks dynamic count k │
+│ Array        │                │                 │
+├───────────────┼───────────────┼─────────────┼──────────┤
+│ Remove       │ Nested loops + │ LinkedHashSet → convert │ Same as array, use StringBuilder at end │
+│ Duplicates   │ temp char[]    │ to String      │ preserves original order │
+│ String       │                │                 │
+├───────────────┼───────────────┼─────────────┼──────────┤
+│ Linear Search│ Single loop    │ Same          │ "Scan array from start, break when found" │
+├───────────────┼───────────────┼─────────────┼──────────┤
+│ Binary Search│ N/A            │ Loop/Recursion│ "Divide array, check mid, move left/right" │
+│ Sorted Array │                │                 │ Mention sorted precondition │
+├───────────────┼───────────────┼─────────────┼──────────┤
+│ Bubble Sort  │ Nested loops,  │ Early exit if  │ "Compare adjacent pairs, largest bubbles to end" │
+│              │ swap          │ swapped=false │ Dry-run small array │
+├───────────────┼───────────────┼─────────────┼──────────┤
+│ Selection Sort│ Nested loops   │ N/A          │ "Select min in each pass, swap with first unsorted index" │
+├───────────────┼───────────────┼─────────────┼──────────┤
+│ Duplicates   │ Nested loops + │ HashSet       │ "Loop temp array brute, Set optimized" │
+│ Elements     │ temp array     │                 │ preserves unique items │
+├───────────────┼───────────────┼─────────────┼──────────┤
+│ Two Pointers │ Nested loops   │ Single pass   │ "Pointers move start/end → sum/pair search" │
+│ Technique    │ compare pairs │ if sorted     │ Works for sorted array, sum=target problems │
+└───────────────┴───────────────┴─────────────┴──────────┘
+```
+
+---
+
+## **How to Use This Map**
+
+1. **Pick a question → Recall brute → Explain → Code**
+2. **Then suggest optimization → Explain time/space**
+3. **Dry-run example aloud**
+4. **Mention key verbal cue** → adds +1 confidence point
+5. **Revise 10 minutes/day** → all 10 types memorized in **1 week**
+
+---
+
+### ✅ Power Tip
+
+* Brute force first → shows **understanding**
+* Optimized → shows **proficiency**
+* Even if interviewer asks edge case → you can **adjust on the fly**
+
+---
+
+If you want, I can also make a **handy “Mini Code Snippet Sheet”** where **all 10 templates are written in 20–30 lines** ready to **write almost verbatim in interviews**.
+
+Do you want me to do that next?
+
+
+
+
+--------------------------------
+
+
+Perfect! Let’s make a **compact mini code snippet sheet** for **all 10 core 2-YOE Java/DSA questions**.
+This sheet will let you **write code almost verbatim in interviews** and revise in **10 minutes**. I’ll keep it **short, O(n²) → O(n) versions**, with **key points in comments**.
+
+---
+
+# **💻 Mini Code Snippet Sheet – 2-YOE Java**
+
+---
+
+### **1️⃣ Max Occurring Character**
+
+```java
+// O(n²)
+char maxChar = 0;
+int maxCount = 0;
+for(int i=0;i<s.length();i++){
+    int count=1;
+    char c = s.charAt(i);
+    for(int j=i+1;j<s.length();j++){
+        if(s.charAt(j)==c) count++;
+    }
+    if(count>maxCount){ maxCount=count; maxChar=c;}
+}
+
+// O(n)
+Map<Character,Integer> map = new HashMap<>();
+for(char c:s.toCharArray()) map.put(c,map.getOrDefault(c,0)+1);
+char ans=0; int maxC=0;
+for(var e:map.entrySet()){
+    if(e.getValue()>maxC){ maxC=e.getValue(); ans=e.getKey();}
+}
+```
+
+---
+
+### **2️⃣ First Non-Repeating Character**
+
+```java
+// O(n²)
+for(int i=0;i<s.length();i++){
+    int count=0;
+    char c = s.charAt(i);
+    for(int j=0;j<s.length();j++) if(s.charAt(j)==c) count++;
+    if(count==1){ System.out.println(c); break;}
+}
+
+// O(n)
+Map<Character,Integer> map2 = new LinkedHashMap<>();
+for(char c:s.toCharArray()) map2.put(c,map2.getOrDefault(c,0)+1);
+for(var e:map2.entrySet()) if(e.getValue()==1){ System.out.println(e.getKey()); break;}
+```
+
+---
+
+### **3️⃣ Remove Duplicates – Array**
+
+```java
+int[] arr={1,2,3,2,1,4}; int n=arr.length;
+int[] temp=new int[n]; int k=0;
+for(int i=0;i<n;i++){
+    boolean dup=false;
+    for(int j=0;j<k;j++) if(arr[i]==temp[j]){dup=true; break;}
+    if(!dup) temp[k++]=arr[i];
+}
+int[] unique=new int[k];
+for(int i=0;i<k;i++) unique[i]=temp[i];
+```
+
+---
+
+### **4️⃣ Remove Duplicates – String**
+
+```java
+String s="aabbcde"; int n=s.length();
+char[] temp=new char[n]; int k=0;
+for(int i=0;i<n;i++){
+    boolean dup=false;
+    for(int j=0;j<k;j++) if(s.charAt(i)==temp[j]){dup=true; break;}
+    if(!dup) temp[k++]=s.charAt(i);
+}
+StringBuilder sb=new StringBuilder();
+for(int i=0;i<k;i++) sb.append(temp[i]);
+System.out.println(sb.toString());
+```
+
+---
+
+### **5️⃣ Linear Search**
+
+```java
+int target=7; int index=-1;
+for(int i=0;i<arr.length;i++){
+    if(arr[i]==target){ index=i; break;}
+}
+System.out.println(index);
+```
+
+---
+
+### **6️⃣ Binary Search**
+
+```java
+Arrays.sort(arr);
+int l=0,r=arr.length-1,index=-1;
+while(l<=r){
+    int mid=l+(r-l)/2;
+    if(arr[mid]==target){index=mid; break;}
+    else if(arr[mid]<target) l=mid+1;
+    else r=mid-1;
+}
+System.out.println(index);
+```
+
+---
+
+### **7️⃣ Bubble Sort**
+
+```java
+for(int i=0;i<arr.length-1;i++){
+    boolean swapped=false;
+    for(int j=0;j<arr.length-i-1;j++){
+        if(arr[j]>arr[j+1]){
+            int t=arr[j]; arr[j]=arr[j+1]; arr[j+1]=t;
+            swapped=true;
+        }
+    }
+    if(!swapped) break;
+}
+```
+
+---
+
+### **8️⃣ Selection Sort**
+
+```java
+for(int i=0;i<arr.length-1;i++){
+    int min=i;
+    for(int j=i+1;j<arr.length;j++) if(arr[j]<arr[min]) min=j;
+    int t=arr[i]; arr[i]=arr[min]; arr[min]=t;
+}
+```
+
+---
+
+### **9️⃣ Find Duplicates – Array**
+
+```java
+// Brute
+for(int i=0;i<arr.length;i++)
+    for(int j=i+1;j<arr.length;j++)
+        if(arr[i]==arr[j]) System.out.println(arr[i]);
+
+// Optimized
+Set<Integer> set=new HashSet<>();
+for(int x:arr){
+    if(set.contains(x)) System.out.println(x);
+    else set.add(x);
+}
+```
+
+---
+
+### **🔟 Two Pointers (Sorted Array)**
+
+```java
+int i=0,j=arr.length-1; int target=10;
+while(i<j){
+    int sum=arr[i]+arr[j];
+    if(sum==target){ System.out.println(i+","+j); break;}
+    else if(sum<target) i++;
+    else j--;
+}
+```
+
+---
+
+## **💡 Tips to Use This Sheet**
+
+1. **Memorize the first 4–5 templates** → covers most string/array questions
+2. **Linear/Binary search & sort** → always dry-run examples
+3. **Two Pointers** → useful for sum/pair/triplet problems
+4. **Mention O(n²) → O(n) improvement** verbally
+5. **Keep sheet next to IDE / notebook** for 10-min revision/day
+
+---
+
+If you want, I can **combine this cheat sheet + visual map + verbal cue table** into **one single-page PDF-style ready sheet** that you can **print and revise daily**.
+
+Do you want me to make that next?
+
+
+---------------------------------------------------
+
+Perfect! Let’s make a **7–10 day “Adobe / 8–10 LPA ready” practice plan** for you.
+The goal: **turn your verbal logic + O(n²) understanding into confident coding + optimized solutions**.
+
+I’ll structure it as:
+
+* **Daily focus**
+* **Questions / templates**
+* **Time to practice**
+* **Goal by end of day**
+
+---
+
+# **📅 10-Day Adobe-Ready Java/DSA Practice Plan**
+
+---
+
+## **Day 1 – Max Occurring Character & First Non-Repeating Character**
+
+**Goal:** Master string frequency logic and initialization of counters
+
+* **Tasks:**
+
+  * Implement **O(n²) loop-based max char** → check count, track char
+  * Implement **O(n) HashMap version**
+  * Implement **first non-repeating char** using both brute + map
+* **Tips:** Dry-run example: `"aabbccddeee"`
+* **Time:** 1–1.5 hr coding + dry-run
+* **Expected Output:** Confident in verbal + code explanation
+
+---
+
+## **Day 2 – Remove Duplicates – Array & String**
+
+**Goal:** Master temp arrays, counting, k-tracking, and sets
+
+* **Tasks:**
+
+  * O(n²) loop-based duplicate removal for array + string
+  * HashSet / LinkedHashSet optimized versions
+  * Edge cases: empty array, all duplicates, single element
+* **Tips:** Keep examples short (6–8 elements/chars) for dry-run
+* **Time:** 1–1.5 hr coding + small examples
+* **Output:** Unique array/string ready confidently
+
+---
+
+## **Day 3 – Linear & Binary Search**
+
+**Goal:** Implement search confidently
+
+* **Tasks:**
+
+  * Linear search (write from scratch)
+  * Binary search: iterative + recursive
+  * Edge cases: target not in array, first/last element
+* **Tips:** Dry-run `[1,3,5,7,9]`, target 5, 10, 1
+* **Time:** 1 hr coding + dry-run
+
+---
+
+## **Day 4 – Bubble Sort & Selection Sort**
+
+**Goal:** Sorting logic + swaps + optimizations
+
+* **Tasks:**
+
+  * Bubble sort (with swapped flag)
+  * Selection sort
+  * Dry-run small array `[3,2,1]`
+  * Discuss complexity O(n²)
+* **Time:** 1 hr coding + verbal explanation
+
+---
+
+## **Day 5 – Two Pointer Technique**
+
+**Goal:** Confidently solve sum/pair problems
+
+* **Tasks:**
+
+  * Two-pointer approach for sorted array sum
+  * Dry-run example `[1,2,3,4,6]`, target 6
+  * Edge cases: no pair, duplicate elements
+* **Time:** 1 hr coding + dry-run
+
+---
+
+## **Day 6 – Finding Duplicates / Unique Elements**
+
+**Goal:** Combine your knowledge from Days 2–5
+
+* **Tasks:**
+
+  * Nested loop vs HashSet for duplicates
+  * Count duplicates / print all duplicates
+  * Dry-run examples
+* **Time:** 1 hr coding + dry-run
+* **Output:** Able to solve all array/string duplicate questions confidently
+
+---
+
+## **Day 7 – Mix Day (Revision + Code Fluency)**
+
+**Goal:** Bring everything together
+
+* **Tasks:**
+
+  * Pick 5 random problems from Days 1–6
+  * Solve in **10–15 min each**, first brute → optimized
+  * Dry-run examples aloud
+* **Time:** 2 hr
+* **Output:** Confident verbal explanation + coding in 10–15 min per problem
+
+---
+
+## **Day 8 – Edge Cases + Confidence Building**
+
+**Goal:** Handle tricky scenarios
+
+* **Tasks:**
+
+  * Arrays of length 0,1, all duplicates
+  * Strings: empty, all same char, long string
+  * Binary search edge cases
+  * Bubble sort already sorted
+* **Time:** 1–1.5 hr
+* **Output:** Edge-case handling naturally in code
+
+---
+
+## **Day 9 – Mock Interview / Timed Coding**
+
+**Goal:** Simulate real interview
+
+* **Tasks:**
+
+  * Pick 5–6 questions
+  * Solve under **30–40 min total**
+  * Speak aloud explanation before coding
+* **Time:** 1–1.5 hr
+* **Output:** Realistic interview practice, confidence in verbal + coding
+
+---
+
+## **Day 10 – Final Quick Revision**
+
+**Goal:** Memorize templates + verbal cues
+
+* **Tasks:**
+
+  * Review **mini cheat sheet + visual map**
+  * Write all **O(n²) templates in 20–30 min**
+  * Quick dry-run for max char, duplicates, search, sort, two-pointer
+* **Time:** 1 hr
+* **Output:** Ready to code confidently, explain logic, mention optimization
+
+---
+
+### **💡 Key Tips for Success**
+
+1. **Brute force first** → explain → code → optimize
+2. **Always mention complexity** → verbal + code
+3. **Dry-run small examples aloud** → interviewer sees understanding
+4. **Focus on templates first** → reduces mental load in interview
+5. **Speak your thought process clearly** → even if code has small bugs
+6. **Edge cases** → they impress senior interviewers
+7. **Daily consistency** → 1–1.5 hr/day is enough for 10-day mastery
+
+---
+
+If you follow this **plan exactly**, in 10 days you will have:
+
+* Brute-force **O(n²) templates** memorized
+* Optimized **O(n) HashMap/Set** implementations ready
+* Confident verbal explanation + code
+* Edge-case handling for arrays and strings
+
+You will be **interview-ready for 8–10 LPA offers** at companies like **Adobe, Zoho, Paytm, etc.**
+
+---
+
+If you want, I can also **make a “daily one-page PDF-style sheet”** combining:
+
+* **Visual template map**
+* **Mini code snippets**
+* **Verbal cues + edge cases**
+
+So you can **revise 10 minutes/day** for all 10 questions.
+
+Do you want me to do that?
+
