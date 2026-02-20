@@ -1,0 +1,258 @@
+Perfect! Let’s make a **Java mini cheatsheet** for strings — concise, practical, and high-yield for interviews. I’ll cover **6 core problems** with patterns, sample Java logic, time/space complexity, and edge cases.
+
+---
+
+# 📝 **Java String Cheatsheet for 9–10 LPA (No DP)**
+
+---
+
+## 1️⃣ Longest Substring Without Repeating Characters
+
+**Pattern:** Sliding Window + HashSet
+
+**Idea:** Maintain a window of unique characters; expand right, shrink left on duplicates.
+
+**Java Logic:**
+
+```java
+public int lengthOfLongestSubstring(String s) {
+    Set<Character> set = new HashSet<>();
+    int left = 0, maxLen = 0;
+    for (int right = 0; right < s.length(); right++) {
+        while (set.contains(s.charAt(right))) {
+            set.remove(s.charAt(left++));
+        }
+        set.add(s.charAt(right));
+        maxLen = Math.max(maxLen, right - left + 1);
+    }
+    return maxLen;
+}
+```
+
+**Time:** O(n)
+**Space:** O(256) ~ O(1)
+
+**Edge Cases:** Empty string, all same characters, all unique characters
+
+---
+
+## 2️⃣ Minimum Window Substring
+
+**Pattern:** Sliding Window + HashMap
+
+**Idea:** Expand window to include all target characters, shrink to minimize length.
+
+**Java Logic (simplified):**
+
+```java
+public String minWindow(String s, String t) {
+    if (s.length() == 0 || t.length() == 0) return "";
+    Map<Character, Integer> map = new HashMap<>();
+    for (char c : t.toCharArray()) map.put(c, map.getOrDefault(c, 0) + 1);
+
+    int left = 0, right = 0, count = 0;
+    int minLen = Integer.MAX_VALUE, start = 0;
+
+    while (right < s.length()) {
+        char c = s.charAt(right);
+        if (map.containsKey(c)) {
+            map.put(c, map.get(c) - 1);
+            if (map.get(c) >= 0) count++;
+        }
+
+        while (count == t.length()) {
+            if (right - left + 1 < minLen) {
+                minLen = right - left + 1;
+                start = left;
+            }
+            char leftChar = s.charAt(left++);
+            if (map.containsKey(leftChar)) {
+                if (map.get(leftChar) >= 0) count--;
+                map.put(leftChar, map.get(leftChar) + 1);
+            }
+        }
+        right++;
+    }
+    return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
+}
+```
+
+**Time:** O(n)
+**Space:** O(256) ~ O(1)
+
+**Edge Cases:** Target chars not in string, multiple valid windows
+
+---
+
+## 3️⃣ Group Anagrams
+
+**Pattern:** HashMap + Sorted String Key
+
+**Idea:** Sort each word → same sorted string means same anagram group.
+
+**Java Logic:**
+
+```java
+public List<List<String>> groupAnagrams(String[] strs) {
+    Map<String, List<String>> map = new HashMap<>();
+    for (String s : strs) {
+        char[] arr = s.toCharArray();
+        Arrays.sort(arr);
+        String key = new String(arr);
+        map.computeIfAbsent(key, k -> new ArrayList<>()).add(s);
+    }
+    return new ArrayList<>(map.values());
+}
+```
+
+**Time:** O(n * k log k)
+**Space:** O(nk)
+
+**Edge Cases:** Empty array, single word, all words same
+
+---
+
+## 4️⃣ Valid Parentheses
+
+**Pattern:** Stack
+
+**Idea:** Push opening brackets; pop & match closing brackets.
+
+**Java Logic:**
+
+```java
+public boolean isValid(String s) {
+    Stack<Character> stack = new Stack<>();
+    for (char c : s.toCharArray()) {
+        if (c == '(') stack.push(')');
+        else if (c == '{') stack.push('}');
+        else if (c == '[') stack.push(']');
+        else if (stack.isEmpty() || stack.pop() != c) return false;
+    }
+    return stack.isEmpty();
+}
+```
+
+**Time:** O(n)
+**Space:** O(n)
+
+**Edge Cases:** Empty string, single bracket, invalid order
+
+---
+
+## 5️⃣ Longest Palindromic Substring
+
+**Pattern:** Expand Around Center
+
+**Idea:** Each index → expand odd & even length palindromes, track max.
+
+**Java Logic:**
+
+```java
+public String longestPalindrome(String s) {
+    if (s == null || s.length() < 1) return "";
+    int start = 0, end = 0;
+    for (int i = 0; i < s.length(); i++) {
+        int len1 = expand(s, i, i);    // odd
+        int len2 = expand(s, i, i + 1); // even
+        int len = Math.max(len1, len2);
+        if (len > end - start) {
+            start = i - (len - 1) / 2;
+            end = i + len / 2;
+        }
+    }
+    return s.substring(start, end + 1);
+}
+
+private int expand(String s, int left, int right) {
+    while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+        left--; right++;
+    }
+    return right - left - 1;
+}
+```
+
+**Time:** O(n²)
+**Space:** O(1)
+
+**Edge Cases:** All characters same, single char, no palindrome >1
+
+---
+
+## 6️⃣ Reverse Words / Reverse String / Remove Duplicates
+
+**Pattern:** Two Pointers + Simulation
+
+**Examples & Logic:**
+
+1. **Reverse Words in a Sentence**
+
+```java
+public String reverseWords(String s) {
+    String[] words = s.trim().split("\\s+");
+    Collections.reverse(Arrays.asList(words));
+    return String.join(" ", words);
+}
+```
+
+2. **Remove Duplicate Characters**
+
+```java
+public String removeDuplicates(String s) {
+    Set<Character> seen = new HashSet<>();
+    StringBuilder sb = new StringBuilder();
+    for (char c : s.toCharArray()) {
+        if (!seen.contains(c)) {
+            seen.add(c);
+            sb.append(c);
+        }
+    }
+    return sb.toString();
+}
+```
+
+3. **Count Vowels & Consonants**
+
+```java
+public void countVowelsConsonants(String s) {
+    int vowels = 0, consonants = 0;
+    for (char c : s.toLowerCase().toCharArray()) {
+        if (c >= 'a' && c <= 'z') {
+            if ("aeiou".indexOf(c) >= 0) vowels++;
+            else consonants++;
+        }
+    }
+    System.out.println("Vowels: " + vowels + ", Consonants: " + consonants);
+}
+```
+
+**Time:** O(n)
+**Space:** O(n) for duplicates, O(1) for vowels/consonants
+
+**Edge Cases:** Empty string, only spaces, special characters
+
+---
+
+# 🎯 Key Takeaways
+
+1. **Patterns > Individual Questions**
+
+   * Sliding Window, HashMap, Stack, Two Pointers, Expand Center
+
+2. **Edge Cases Matter**
+
+   * Empty strings, all same characters, special characters
+
+3. **Clean Java Code**
+
+   * Use `HashMap.computeIfAbsent`, `StringBuilder`, `Set`, `Stack`
+
+4. **Time/Space Complexity**
+
+   * Always explain to interviewer
+
+---
+
+If you want, I can make a **1-page PDF-style “interview-ready cheatsheet”** with **these 6 problems + key patterns + sample code** so you can revise in **30 minutes per day**.
+
+Do you want me to do that next?
