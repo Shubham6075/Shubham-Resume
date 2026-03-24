@@ -350,3 +350,308 @@ If interviewer asks open-ended like:
 If you want next:
 👉 I can take **full mock interview (real questions + pressure)**
 👉 or **Spring Boot + DB + Microservices questions**
+
+
+
+
+
+
+
+
+Great — now you’re thinking like someone preparing **smartly for switch** 👍
+For **2 years Java Spring Boot role**, DSA is **not hardcore FAANG-level**, but you still need **strong basics**.
+
+👉 I’ll give you exactly:
+
+* what to study
+* which problems
+* how deep
+* interview-ready patterns
+
+---
+
+# 🎯 🎯 Reality Check (Important)
+
+For your experience:
+
+```text
+Backend + Kafka + DB → 70%
+DSA → 30%
+```
+
+👉 They won’t ask:
+❌ DP hard
+❌ Graph algorithms deep
+
+👉 They WILL ask:
+✔ Arrays
+✔ Strings
+✔ Stack
+✔ Basic Hashing
+✔ Sliding window
+
+---
+
+# 🔥 MUST-DO DSA TOPICS (with exact questions)
+
+---
+
+# 🟢 1. Arrays (VERY IMPORTANT)
+
+## 🎯 Patterns to learn
+
+### ✔ Two Pointer
+
+### ✔ Sliding Window
+
+### ✔ Prefix Sum
+
+---
+
+## 🔥 Questions
+
+1. **Two Sum**
+2. **Best Time to Buy & Sell Stock**
+3. **Move Zeroes**
+4. **Container With Most Water**
+5. **Maximum Subarray (Kadane’s Algo)**
+6. **Merge Intervals**
+7. **Subarray Sum Equals K**
+
+---
+
+## 🎯 Interview Tip
+
+👉 Always explain:
+
+* brute force
+* optimized
+
+---
+
+# 🟢 2. Strings (VERY IMPORTANT)
+
+---
+
+## 🎯 Patterns
+
+✔ Frequency count
+✔ Sliding window
+✔ Palindrome
+
+---
+
+## 🔥 Questions
+
+1. **Valid Anagram**
+2. **Longest Substring Without Repeating Characters**
+3. **Longest Palindromic Substring**
+4. **Group Anagrams**
+5. **String Compression**
+6. **Check if two strings are rotation**
+
+---
+
+## 🎯 Must Know
+
+👉 Use:
+
+* HashMap
+* Set
+* StringBuilder
+
+---
+
+# 🟢 3. Hashing (MOST IMPORTANT 🔥)
+
+---
+
+## 🎯 Why?
+
+👉 Used in almost every question
+
+---
+
+## 🔥 Questions
+
+1. **Two Sum (again with map)**
+2. **First Non-Repeating Character**
+3. **Longest Consecutive Sequence**
+4. **Find duplicates in array**
+5. **Frequency sort**
+
+---
+
+---
+
+# 🟢 4. Stack (VERY COMMON)
+
+---
+
+## 🎯 Patterns
+
+✔ Next Greater Element
+✔ Monotonic stack
+
+---
+
+## 🔥 Questions
+
+1. **Valid Parentheses**
+2. **Next Greater Element**
+3. **Min Stack**
+4. **Largest Rectangle in Histogram (optional)**
+5. **Stock Span Problem**
+
+---
+
+---
+
+# 🟢 5. Sliding Window (VERY HIGH ROI 🔥)
+
+---
+
+## 🔥 Questions
+
+1. **Longest substring without repeating**
+2. **Maximum sum subarray of size K**
+3. **Minimum window substring (optional)**
+4. **Count occurrences of anagrams**
+
+---
+
+---
+
+# 🟢 6. Recursion / Backtracking (BASIC ONLY)
+
+---
+
+## 🔥 Questions
+
+1. **Subsets**
+2. **Permutations**
+3. **Combination Sum (basic)**
+
+👉 Don’t go very deep
+
+---
+
+# 🟢 7. Java 8 + DSA (INTERVIEW FAVORITE 🔥)
+
+---
+
+## You MUST know:
+
+```java
+// frequency map
+map.put(c, map.getOrDefault(c, 0) + 1);
+
+// streams
+list.stream().filter().map().collect()
+
+// sorting
+list.sort((a,b) -> a-b);
+```
+
+---
+
+# 🟢 🎯 15 QUESTIONS (DO THESE = ENOUGH 🔥)
+
+If you do ONLY these → you’re safe:
+
+1. Two Sum
+2. Valid Anagram
+3. Longest Substring Without Repeating
+4. Maximum Subarray
+5. Move Zeroes
+6. Best Time to Buy Sell Stock
+7. Valid Parentheses
+8. Next Greater Element
+9. Merge Intervals
+10. Subarray Sum Equals K
+11. Longest Consecutive Sequence
+12. Group Anagrams
+13. Min Stack
+14. Sliding Window Max Sum
+15. First Non-Repeating Character
+
+---
+
+# 🟢 🟣 Hinglish Strategy
+
+👉 Tumhe FAANG level nahi karna
+
+👉 Bas itna karo:
+
+✔ pattern samajh lo
+✔ code likh pao
+✔ explain kar pao
+
+---
+
+# 🟢 🎯 Interview Expectation (2 YOE)
+
+They will check:
+
+✔ Logic clarity
+✔ Edge cases
+✔ Code readability
+✔ Approach
+
+NOT:
+
+❌ crazy optimization
+❌ DP hard
+
+---
+
+# 🟢 🚀 Final Plan (5 Days)
+
+### Day 1:
+
+Arrays + Two Pointer
+
+### Day 2:
+
+Strings + Hashing
+
+### Day 3:
+
+Stack + Sliding Window
+
+### Day 4:
+
+Mixed revision
+
+### Day 5:
+
+Mock + coding practice
+
+---
+
+# 🟢 💥 Final Advice
+
+👉 Your backend + Kafka is already strong
+
+👉 Just make DSA:
+
+```text
+Decent + confident
+```
+
+👉 That’s enough to crack switch 🚀
+
+---
+
+# 🔥 If you want next
+
+I can give you:
+
+✅ Company-wise questions (Infosys, TCS, Product-based)
+✅ Live mock coding round
+✅ Java + Spring Boot tricky questions
+
+Just tell me 👍
+
+
+
